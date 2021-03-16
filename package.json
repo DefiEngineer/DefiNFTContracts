@@ -1,0 +1,33 @@
+{
+  "name": "dfsnft-contracts",
+  "version": "0.1.0",
+  "description": "Solidity contract code for DFSNFT",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfsnft/dfsnft-contracts.git"
+  },
+  "keywords": [
+    "nft",
+    "solidity",
+    "ethereum",
+    "dfs"
+  ],
+  "author": "Robert Schneider",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfsnft/dfsnft-contracts/issues"
+  },
+  "homepage": "https://github.com/dfsnft/dfsnft-contracts#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.0.32",
+    "hardhat": "^2.1.1"
+  }
+}
