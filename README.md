@@ -1,1 +1,1 @@
-# DFSNFT Contracts
+# DFS/NFT Contracts

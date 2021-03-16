@@ -1,10 +1,14 @@
 {
   "name": "dfsnft-contracts",
   "version": "0.1.0",
-  "description": "Solidity contract code for DFSNFT",
+  "description": "Solidity contract code for DFS/NFT",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test"
+    "test": "hardhat test --network hardhat",
+    "deploy": "hardhat run scripts/deploy.js",
+    "compile": "hardhat compile",
+    "chain": "hardhat node",
+    "fork": "hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/odl0H3NMCIcNiqrHKNOQxz2jYfks11Fo"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,10 @@
     "chai": "^4.3.4",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.0.32",
-    "hardhat": "^2.1.1"
+    "hardhat": "^2.1.1",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
