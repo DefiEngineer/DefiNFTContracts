@@ -6,9 +6,10 @@
   "scripts": {
     "test": "hardhat test --network hardhat",
     "deploy": "hardhat run scripts/deploy.js",
+    "publish": "hardhat run scripts/publish.js",
     "compile": "hardhat compile",
     "chain": "hardhat node",
-    "fork": "hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/odl0H3NMCIcNiqrHKNOQxz2jYfks11Fo"
+    "console": "hardhat console --network localhost"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,9 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@tenderly/hardhat-tenderly": "^1.0.11",
     "chai": "^4.3.4",
+    "chalk": "^4.1.0",
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.0.32",
     "hardhat": "^2.1.1",
