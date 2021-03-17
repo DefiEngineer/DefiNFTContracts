@@ -18,14 +18,14 @@ contract AavegotchiFacet {
         for (uint256 i; i < len;) {
             uint256 tokenId = s.tokenIds[i];
             if (s.aavegotchis[tokenId].owner == _owner) {
-                tokenIds_[i] = tokenId;                
+                tokenIds_[i] = tokenId;
                 unchecked {
                     count++;
                 }
             }
             unchecked {
                 i++;
-            }            
+            }
         }
         assembly {
             mstore(tokenIds_, count)

@@ -164,7 +164,7 @@ contract ItemsFacet is Modifiers {
 
     /**
         @notice Set the base url for all voucher types
-        @param _value The new base url        
+        @param _value The new base url
     */
     function setBaseURI(string memory _value) external onlyDaoOrOwner {
         // require(LibMeta.msgSender() == s.contractOwner, "ItemsFacet: Must be contract owner");
