@@ -4,10 +4,10 @@ const createDiamond = require("../utils/create");
 
 async function main() {
   const network = hre.network.name;
-  const { diamond, facets } = await createDiamond();
+  const { diamond, deployedfacets } = await createDiamond();
 
   if (network === "kovan") {
-    facets.forEach(async (facet) => {
+    deployedfacets.forEach(async (facet) => {
       const [name, contract] = facet;
       await hre.tenderly.verify({
         name,
