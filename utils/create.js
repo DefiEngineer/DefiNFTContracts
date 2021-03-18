@@ -65,11 +65,11 @@ async function createDiamond(test = false) {
 
   // Get facet names programatically from file directory
   const facets = await deployFacets([
-    "contracts/Aavegotchi/facets/BridgeFacet.sol:BridgeFacet",
-    "contracts/Aavegotchi/facets/AavegotchiFacet.sol:AavegotchiFacet",
+    "BridgeFacet",
+    "AavegotchiFacet",
     "AavegotchiGameFacet",
     "SvgFacet",
-    "contracts/Aavegotchi/facets/ItemsFacet.sol:ItemsFacet",
+    "ItemsFacet",
     "ItemsTransferFacet",
     "CollateralFacet",
     "DAOFacet",
@@ -81,7 +81,7 @@ async function createDiamond(test = false) {
   ]);
 
   const diamond = await deployDiamond({
-    initDiamond: "contracts/Aavegotchi/InitDiamond.sol:InitDiamond",
+    initDiamond: "InitDiamond",
     owner: deployerAddr,
     facets,
     args: [
