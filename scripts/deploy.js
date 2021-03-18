@@ -1,18 +1,24 @@
+const { writeFileSync } = require("fs");
 const hre = require("hardhat");
-const fs = require("fs");
+const createDiamond = require("../utils/create");
 
 async function main() {
-  const contractName = "HackerNews";
-  const Artifacts = await hre.ethers.getContractFactory(contractName);
-  const deployed = await Artifacts.deploy();
-  await deployed.deployed();
+  const network = hre.network.name;
+  const { diamond, facets } = await createDiamond();
 
-  fs.writeFileSync(
-    `${hre.config.paths.artifacts}/${contractName}.address`,
-    deployed.address
-  );
+  if (network === "kovan") {
+    facets.forEach(async (facet) => {
+      const [name, contract] = facet;
+      await hre.tenderly.verify({
+        name,
+        address: contract.address,
+        network,
+      });
+    });
+  }
 
-  console.log(`${contractName} deployed to: `, deployed.address);
+  const path = `${hre.config.paths.artifacts}/Diamond.${hre.network.name}.address`;
+  writeFileSync(path, diamond.address);
 }
 
 main()
