@@ -6,9 +6,8 @@ function publishContract(name, pubDir, graphDir) {
   console.log(" 💽 Publishing", chalk.cyan(name), "to", chalk.gray(pubDir));
   try {
     let artifacts = hre.config.paths.artifacts;
-    // TODO: when you change sources in hardhat config, remove "sandbox" from path
     let contract = fs
-      .readFileSync(`${artifacts}/contracts/sandbox/${name}.sol/${name}.json`)
+      .readFileSync(`${artifacts}/contracts/${name}.sol/${name}.json`)
       .toString();
     const address = fs.readFileSync(`${artifacts}/${name}.address`).toString();
     contract = JSON.parse(contract);

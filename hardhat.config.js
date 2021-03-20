@@ -5,8 +5,18 @@ require("@tenderly/hardhat-tenderly");
 const defaultNetwork = "localhost";
 
 task("accounts", "Prints the list of accounts", async () => {
-  const accounts = await ethers.getSigners();
-  accounts.forEach((account) => console.log(account));
+  const accts = await ethers.getSigners();
+  accts.forEach((acct) => console.log(acct.address));
+});
+
+task("createRelease", "Creates a new release", async () => {
+  const contract = await ethers.getContractAt(
+    "DAOFacet",
+    "0x9A676e781A523b5d0C0e43731313A708CB607508"
+  );
+  const packPrice = ethers.utils.parseEther("100");
+  const tx = await contract.createHaunt("10000", packPrice, "0x000000");
+  await tx.wait();
 });
 
 module.exports = {

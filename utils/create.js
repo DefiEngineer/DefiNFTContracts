@@ -47,10 +47,7 @@ async function createDiamond() {
     pixelCraft = await companyAcct.getAddress();
   } else if (network === "localhost") {
     linkAddress = "0x514910771af9ca656af840dff83e8264ecf986ca";
-    linkContract = await hre.ethers.getContractAt(
-      "ILink",
-      "0x514910771af9ca656af840dff83e8264ecf986ca"
-    );
+    linkContract = await hre.ethers.getContractAt("ILink", linkAddress);
     vrfCoordinator = await linkAcct.getAddress();
     keyHash =
       "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
@@ -61,6 +58,17 @@ async function createDiamond() {
     rarityFarming = await farmingAcct.getAddress();
     pixelCraft = await companyAcct.getAddress();
   } else if (network === "kovan") {
+    linkAddress = "0xa36085f69e2889c224210f603d836748e7dc0088";
+    linkContract = await hre.ethers.getContractAt("ILink", linkAddress);
+    vrfCoordinator = "0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9";
+    keyHash =
+      "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
+    fee = hre.ethers.utils.parseEther("0.1");
+    initialReleaseSize = "10000";
+    dao = await daoAcct.getAddress();
+    daoTreasury = dao;
+    rarityFarming = await farmingAcct.getAddress();
+    pixelCraft = await companyAcct.getAddress();
   } else {
     throw Error(`No network settings available for ${network}.`);
   }
@@ -114,8 +122,8 @@ async function createDiamond() {
   const { DAOFacet } = diamondFacets;
 
   // Add initial release
-  tx = await DAOFacet.createHaunt(initialReleaseSize, packPrice, "0x000000");
-  await tx.wait();
+  // tx = await DAOFacet.createHaunt(initialReleaseSize, packPrice, "0x000000");
+  // await tx.wait();
 
   // Add collaterals
   tx = await DAOFacet.addCollateralTypes(getCollaterals(network, linkAddress));
@@ -129,7 +137,7 @@ async function createDiamond() {
     diamond,
     linkContract,
     linkAddress,
-    deployedFacets,
+    facets: deployedFacets,
     ...diamondFacets,
   };
 }

@@ -49,6 +49,7 @@ async function deployFacets(facetList) {
     const factory = await ethers.getContractFactory(facet);
     const contract = await factory.deploy();
     await contract.deployed();
+    console.log(`${facet}: ${contract.address}`);
     result.push([facet, contract]);
   }
   return result;
