@@ -122,8 +122,8 @@ async function createDiamond() {
   const { DAOFacet } = diamondFacets;
 
   // Add initial release
-  // tx = await DAOFacet.createHaunt(initialReleaseSize, packPrice, "0x000000");
-  // await tx.wait();
+  tx = await DAOFacet.createHaunt(initialReleaseSize, packPrice, "0x000000");
+  await tx.wait();
 
   // Add collaterals
   tx = await DAOFacet.addCollateralTypes(getCollaterals(network, linkAddress));

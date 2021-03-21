@@ -24,6 +24,7 @@ async function main() {
 
   const path = `${hre.config.paths.artifacts}/Diamond.${hre.network.name}.address`;
   writeFileSync(path, diamond.address);
+  console.log(`Diamond: ${diamond.address}`);
 }
 
 main()
