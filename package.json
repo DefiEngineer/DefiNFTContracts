@@ -36,6 +36,7 @@
     "ethereum-waffle": "^3.3.0",
     "ethers": "^5.0.32",
     "hardhat": "^2.1.1",
+    "ipfs": "^0.54.4",
     "prettier": "^2.2.1"
   },
   "dependencies": {
