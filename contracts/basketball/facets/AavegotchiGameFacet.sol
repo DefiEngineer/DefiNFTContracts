@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
 import {
     LibAavegotchi,
@@ -15,7 +15,8 @@ import {LibAppStorage} from "../libraries/LibAppStorage.sol";
 
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
-import {Modifiers, Haunt, Aavegotchi} from "../libraries/LibAppStorage.sol";
+import {Haunt, Aavegotchi} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 // import "hardhat/console.sol";
 import {CollateralEscrow} from "../CollateralEscrow.sol";

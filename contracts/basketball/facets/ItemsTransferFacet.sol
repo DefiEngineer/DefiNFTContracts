@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
-import {Modifiers, EQUIPPED_WEARABLE_SLOTS, Aavegotchi} from "../libraries/LibAppStorage.sol";
+import {EQUIPPED_WEARABLE_SLOTS, Aavegotchi} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {IERC721} from "../../shared/interfaces/IERC721.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibItems} from "../libraries/LibItems.sol";

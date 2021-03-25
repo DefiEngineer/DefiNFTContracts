@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
 import {AppStorage, SvgLayer, Dimensions} from "../libraries/LibAppStorage.sol";
 import {
@@ -10,7 +10,8 @@ import {
     NUMERIC_TRAITS_NUM
 } from "../libraries/LibAavegotchi.sol";
 import {LibItems} from "../libraries/LibItems.sol";
-import {Modifiers, ItemType} from "../libraries/LibAppStorage.sol";
+import {ItemType} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibSvg} from "../libraries/LibSVG.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
 struct AppStorage {
     mapping(address => mapping(address => bool)) approved;

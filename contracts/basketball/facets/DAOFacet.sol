@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
-import {Modifiers, ItemType, WearableSet, NUMERIC_TRAITS_NUM} from "../libraries/LibAppStorage.sol";
+import {ItemType, WearableSet, NUMERIC_TRAITS_NUM} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {AavegotchiCollateralTypeIO} from "../libraries/LibAavegotchi.sol";
 import {LibERC1155} from "../../shared/libraries/LibERC1155.sol";
 import {LibItems} from "../libraries/LibItems.sol";
@@ -20,17 +21,9 @@ contract DAOFacet is Modifiers {
     event GameManagerTransferred(address indexed previousGameManager, address indexed newGameManager);
     event ItemTypeMaxQuantity(uint256[] _itemIds, uint256[] _maxQuanities);
 
-    /***********************************|
-   |             Read Functions         |
-   |__________________________________*/
-
     function gameManager() external view returns (address) {
         return s.gameManager;
     }
-
-    /***********************************|
-   |             Write Functions        |
-   |__________________________________*/
 
     function setDao(address _newDao, address _newDaoTreasury) external onlyDaoOrOwner {
         emit DaoTransferred(s.dao, _newDao);

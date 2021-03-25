@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
-import {Modifiers, ListingListItem} from "../libraries/LibAppStorage.sol";
+import {ListingListItem} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibERC1155Marketplace, ERC1155Listing} from "../libraries/LibERC1155Marketplace.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";

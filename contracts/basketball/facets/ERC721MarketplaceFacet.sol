@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.2;
+pragma solidity 0.8.3;
 
 import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibAavegotchi.sol";
 import {IERC721} from "../../shared/interfaces/IERC721.sol";
@@ -7,7 +7,8 @@ import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC721Marketplace, ERC721Listing} from "../libraries/LibERC721Marketplace.sol";
-import {Modifiers, ListingListItem} from "../libraries/LibAppStorage.sol";
+import {ListingListItem} from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 
 // import "hardhat/console.sol";
 
