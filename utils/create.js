@@ -122,7 +122,12 @@ async function createDiamond() {
   const { DAOFacet } = diamondFacets;
 
   // Add initial release
-  tx = await DAOFacet.createHaunt(initialReleaseSize, packPrice, "0x000000");
+  tx = await DAOFacet.createHaunt(
+    initialReleaseSize,
+    packPrice,
+    "0x000000",
+    "https://cdn11.bigcommerce.com/s-0kvv9/images/stencil/1280x1280/products/333664/487120/mosaic1920blasterpack__81086.1594411359.jpg"
+  );
   await tx.wait();
 
   // Add collaterals

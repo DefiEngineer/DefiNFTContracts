@@ -79,6 +79,7 @@ struct ItemType {
     uint8 category; // 0 is wearable, 1 is badge, 2 is consumable
     int16 kinshipBonus; //[CONSUMABLE ONLY] How much this consumable boosts (or reduces) kinship score
     uint32 experienceBonus; //[CONSUMABLE ONLY]
+    string image;
 }
 
 struct WearableSet {

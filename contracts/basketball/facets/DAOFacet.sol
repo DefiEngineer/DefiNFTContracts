@@ -15,7 +15,7 @@ contract DAOFacet is Modifiers {
     event UpdateCollateralModifiers(int16[NUMERIC_TRAITS_NUM] _oldModifiers, int16[NUMERIC_TRAITS_NUM] _newModifiers);
     event AddCollateralType(AavegotchiCollateralTypeIO _collateralType);
     event AddItemType(ItemType _itemType);
-    event CreateHaunt(uint256 indexed _hauntId, uint256 _hauntMaxSize, uint256 _portalPrice, bytes32 _bodyColor);
+    event CreateHaunt(uint256 indexed _hauntId, uint256 _hauntMaxSize, uint256 _portalPrice, bytes32 _bodyColor, string _image);
     event GrantExperience(uint256[] _tokenIds, uint256[] _xpValues);
     event AddWearableSet(WearableSet _wearableSet);
     event GameManagerTransferred(address indexed previousGameManager, address indexed newGameManager);
@@ -65,7 +65,8 @@ contract DAOFacet is Modifiers {
     function createHaunt(
         uint24 _hauntMaxSize,
         uint96 _portalPrice,
-        bytes3 _bodyColor
+        bytes3 _bodyColor,
+        string memory _image
     ) external onlyDaoOrOwner returns (uint256 hauntId_) {
         uint256 currentHauntId = s.currentHauntId;
         require(
@@ -77,7 +78,7 @@ contract DAOFacet is Modifiers {
         s.haunts[hauntId_].hauntMaxSize = _hauntMaxSize;
         s.haunts[hauntId_].portalPrice = _portalPrice;
         s.haunts[hauntId_].bodyColor = _bodyColor;
-        emit CreateHaunt(hauntId_, _hauntMaxSize, _portalPrice, _bodyColor);
+        emit CreateHaunt(hauntId_, _hauntMaxSize, _portalPrice, _bodyColor, _image);
     }
 
     function mintItems(

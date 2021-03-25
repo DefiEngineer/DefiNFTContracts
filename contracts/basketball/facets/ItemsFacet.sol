@@ -4,7 +4,6 @@ pragma solidity 0.8.3;
 import {LibItems, ItemTypeIO} from "../libraries/LibItems.sol";
 import {
     LibAppStorage,
-    Modifiers,
     ItemType,
     Aavegotchi,
     ItemType,
@@ -13,6 +12,7 @@ import {
     EQUIPPED_WEARABLE_SLOTS,
     PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibAppStorage.sol";
+import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibAavegotchi} from "../libraries/LibAavegotchi.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
