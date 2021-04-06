@@ -7,7 +7,7 @@ describe("Diamond Deployment Process", async () => {
     global.set = true;
     global.diamond = deployed.diamond;
     global.bridgeFacet = deployed.BridgeFacet;
-    global.aavegotchiFacet = deployed.AavegotchiFacet;
+    global.basketballFacet = deployed.BasketballFacet;
     global.aavegotchiGameFacet = deployed.AavegotchiGameFacet;
     global.itemsFacet = deployed.ItemsFacet;
     global.itemsTransferFacet = deployed.ItemsTransferFacet;
@@ -28,7 +28,7 @@ describe("Diamond Deployment Process", async () => {
 
   it("Should have diamond address for all facets", async () => {
     expect(global.bridgeFacet.address).to.equal(global.diamond.address);
-    expect(global.aavegotchiFacet.address).to.equal(global.diamond.address);
+    expect(global.basketballFacet.address).to.equal(global.diamond.address);
     expect(global.aavegotchiGameFacet.address).to.equal(global.diamond.address);
     expect(global.itemsFacet.address).to.equal(global.diamond.address);
     expect(global.itemsTransferFacet.address).to.equal(global.diamond.address);
