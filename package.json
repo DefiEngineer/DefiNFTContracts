@@ -9,6 +9,7 @@
     "publish": "hardhat run scripts/publish.js",
     "compile": "hardhat compile",
     "chain": "hardhat node",
+    "fork": "hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/odl0H3NMCIcNiqrHKNOQxz2jYfks11Fo",
     "console": "hardhat console --network localhost"
   },
   "repository": {

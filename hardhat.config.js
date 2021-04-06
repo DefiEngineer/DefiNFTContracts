@@ -24,9 +24,6 @@ module.exports = {
   networks: {
     localhost: {
       url: "http://127.0.0.1:8545",
-      forking: {
-        url: process.env.FORK_URL,
-      },
     },
     kovan: {
       url: process.env.KOVAN_URL,
