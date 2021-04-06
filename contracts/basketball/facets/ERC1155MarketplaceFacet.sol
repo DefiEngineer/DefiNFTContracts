@@ -200,9 +200,9 @@ contract ERC1155MarketplaceFacet is Modifiers {
         {
             // handles stack too deep error
             uint256 daoShare = cost / 100;
-            uint256 pixelCraftShare = (cost * 2) / 100;
-            uint256 transferAmount = cost - (daoShare + pixelCraftShare);
-            LibERC20.transferFrom(s.ghstContract, buyer, s.pixelCraft, pixelCraftShare);
+            uint256 companyShare = (cost * 2) / 100;
+            uint256 transferAmount = cost - (daoShare + companyShare);
+            LibERC20.transferFrom(s.ghstContract, buyer, s.dfsnft, companyShare);
             LibERC20.transferFrom(s.ghstContract, buyer, s.daoTreasury, daoShare);
             LibERC20.transferFrom(s.ghstContract, buyer, seller, transferAmount);
 

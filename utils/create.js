@@ -28,7 +28,7 @@ async function createDiamond() {
   let dao;
   let daoTreasury;
   let rarityFarming;
-  let pixelCraft;
+  let dfsnft;
 
   if (network === "hardhat") {
     const LinkTokenMock = await hre.ethers.getContractFactory("LinkTokenMock");
@@ -44,7 +44,7 @@ async function createDiamond() {
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
     rarityFarming = await farmingAcct.getAddress();
-    pixelCraft = await companyAcct.getAddress();
+    dfsnft = await companyAcct.getAddress();
   } else if (network === "localhost") {
     linkAddress = "0x514910771af9ca656af840dff83e8264ecf986ca";
     linkContract = await hre.ethers.getContractAt("ILink", linkAddress);
@@ -56,7 +56,7 @@ async function createDiamond() {
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
     rarityFarming = await farmingAcct.getAddress();
-    pixelCraft = await companyAcct.getAddress();
+    dfsnft = await companyAcct.getAddress();
   } else if (network === "kovan") {
     linkAddress = "0xa36085f69e2889c224210f603d836748e7dc0088";
     linkContract = await hre.ethers.getContractAt("ILink", linkAddress);
@@ -68,7 +68,7 @@ async function createDiamond() {
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
     rarityFarming = await farmingAcct.getAddress();
-    pixelCraft = await companyAcct.getAddress();
+    dfsnft = await companyAcct.getAddress();
   } else {
     throw Error(`No network settings available for ${network}.`);
   }
@@ -97,7 +97,7 @@ async function createDiamond() {
       [
         dao,
         daoTreasury,
-        pixelCraft,
+        dfsnft,
         rarityFarming,
         linkAddress,
         keyHash,

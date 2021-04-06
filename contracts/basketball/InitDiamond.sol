@@ -16,7 +16,7 @@ contract InitDiamond {
     struct Args {
         address dao;
         address daoTreasury;
-        address pixelCraft;
+        address dfsnft;
         address rarityFarming;
         address ghstContract;
         bytes32 chainlinkKeyHash;
@@ -31,7 +31,7 @@ contract InitDiamond {
         s.dao = _args.dao;
         s.daoTreasury = _args.daoTreasury;
         s.rarityFarming = _args.rarityFarming;
-        s.pixelCraft = _args.pixelCraft;
+        s.dfsnft = _args.dfsnft;
         s.itemsBaseUri = "https://ipfs.io/ipfs/";
 
         s.domainSeparator = LibMeta.domainSeparator("BasketballDiamond", "V1");

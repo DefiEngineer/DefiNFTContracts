@@ -287,7 +287,7 @@ library LibAavegotchi {
         //33% to burn address
         uint256 burnShare = (_ghst * 33) / 100;
 
-        //17% to Pixelcraft wallet
+        //17% to company wallet
         uint256 companyShare = (_ghst * 17) / 100;
 
         //40% to rarity farming rewards
@@ -300,7 +300,7 @@ library LibAavegotchi {
         // GHST token contract does not allow transferring to address(0) address: https://etherscan.io/address/0x3F382DbD960E3a9bbCeaE22651E88158d2791550#code
         address ghstContract = s.ghstContract;
         LibERC20.transferFrom(ghstContract, _from, address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), burnShare);
-        LibERC20.transferFrom(ghstContract, _from, s.pixelCraft, companyShare);
+        LibERC20.transferFrom(ghstContract, _from, s.dfsnft, companyShare);
         LibERC20.transferFrom(ghstContract, _from, s.rarityFarming, rarityFarmShare);
         LibERC20.transferFrom(ghstContract, _from, s.dao, daoShare);
     }

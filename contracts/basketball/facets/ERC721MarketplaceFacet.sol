@@ -212,9 +212,9 @@ contract ERC721MarketplaceFacet is Modifiers {
         LibERC721Marketplace.addERC721ListingItem(seller, listing.category, "purchased", _listingId);
 
         uint256 daoShare = priceInWei / 100;
-        uint256 pixelCraftShare = (priceInWei * 2) / 100;
-        uint256 transferAmount = priceInWei - (daoShare + pixelCraftShare);
-        LibERC20.transferFrom(s.ghstContract, buyer, s.pixelCraft, pixelCraftShare);
+        uint256 companyShare = (priceInWei * 2) / 100;
+        uint256 transferAmount = priceInWei - (daoShare + companyShare);
+        LibERC20.transferFrom(s.ghstContract, buyer, s.dfsnft, companyShare);
         LibERC20.transferFrom(s.ghstContract, buyer, s.daoTreasury, daoShare);
         LibERC20.transferFrom(s.ghstContract, buyer, seller, transferAmount);
 

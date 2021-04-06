@@ -56,11 +56,11 @@ contract AavegotchiGameFacet is Modifiers {
         address burnAddress;
         address daoAddress;
         address rarityFarming;
-        address pixelCraft;
+        address dfsnft;
     }
 
     function revenueShares() external view returns (RevenueSharesIO memory) {
-        return RevenueSharesIO(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF, s.daoTreasury, s.rarityFarming, s.pixelCraft);
+        return RevenueSharesIO(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF, s.daoTreasury, s.rarityFarming, s.dfsnft);
     }
 
     function portalAavegotchiTraits(uint256 _tokenId)

@@ -182,7 +182,7 @@ struct AppStorage {
     address gameManager;
     address dao;
     address daoTreasury;
-    address pixelCraft;
+    address dfsnft;
     address rarityFarming;
     string itemsBaseUri;
     bytes32 domainSeparator;
