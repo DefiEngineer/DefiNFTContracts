@@ -33,7 +33,7 @@ contract InitDiamond {
         s.daoTreasury = _args.daoTreasury;
         s.rarityFarming = _args.rarityFarming;
         s.pixelCraft = _args.pixelCraft;
-        s.itemsBaseUri = "https://aavegotchi.com/metadata/items/";
+        s.itemsBaseUri = "https://ipfs.io/ipfs/";
         s.childChainManager = _args.childChainManager;
 
         s.domainSeparator = LibMeta.domainSeparator("AavegotchiDiamond", "V1");
