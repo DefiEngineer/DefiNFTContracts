@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibAavegotchi.sol";
+import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibBasketball.sol";
 
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 import {AppStorage} from "../libraries/LibAppStorage.sol";

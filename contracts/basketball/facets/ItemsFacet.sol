@@ -13,7 +13,7 @@ import {
     PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {LibAavegotchi} from "../libraries/LibAavegotchi.sol";
+import {LibAavegotchi} from "../libraries/LibBasketball.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC1155Marketplace} from "../libraries/LibERC1155Marketplace.sol";

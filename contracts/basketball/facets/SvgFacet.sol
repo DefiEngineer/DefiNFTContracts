@@ -8,7 +8,7 @@ import {
     EQUIPPED_WEARABLE_SLOTS,
     PORTAL_AAVEGOTCHIS_NUM,
     NUMERIC_TRAITS_NUM
-} from "../libraries/LibAavegotchi.sol";
+} from "../libraries/LibBasketball.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {ItemType} from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";

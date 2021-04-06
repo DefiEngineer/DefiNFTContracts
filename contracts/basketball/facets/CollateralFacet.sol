@@ -2,7 +2,7 @@
 pragma solidity 0.8.3;
 
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {LibAavegotchi, AavegotchiCollateralTypeIO} from "../libraries/LibAavegotchi.sol";
+import {LibAavegotchi, AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";

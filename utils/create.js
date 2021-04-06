@@ -75,7 +75,7 @@ async function createDiamond() {
   // Get facet names programatically from file directory
   const deployedFacets = await deployFacets([
     "BasketballFacet",
-    "AavegotchiGameFacet",
+    "BasketballGameFacet",
     "SvgFacet",
     "ItemsFacet",
     "ItemsTransferFacet",

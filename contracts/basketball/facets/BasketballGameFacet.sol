@@ -9,7 +9,7 @@ import {
     PortalAavegotchiTraitsIO,
     InternalPortalAavegotchiTraitsIO,
     PORTAL_AAVEGOTCHIS_NUM
-} from "../libraries/LibAavegotchi.sol";
+} from "../libraries/LibBasketball.sol";
 
 import {LibAppStorage} from "../libraries/LibAppStorage.sol";
 

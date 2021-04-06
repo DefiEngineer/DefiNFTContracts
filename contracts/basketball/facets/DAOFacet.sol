@@ -3,7 +3,7 @@ pragma solidity 0.8.3;
 
 import {ItemType, WearableSet, NUMERIC_TRAITS_NUM} from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {AavegotchiCollateralTypeIO} from "../libraries/LibAavegotchi.sol";
+import {AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
 import {LibERC1155} from "../../shared/libraries/LibERC1155.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {LibSvg} from "../libraries/LibSVG.sol";

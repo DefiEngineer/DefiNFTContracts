@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibAavegotchi.sol";
+import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibBasketball.sol";
 import {IERC721} from "../../shared/interfaces/IERC721.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";

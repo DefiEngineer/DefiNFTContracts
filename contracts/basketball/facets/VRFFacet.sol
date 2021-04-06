@@ -4,7 +4,7 @@ pragma solidity 0.8.3;
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC721Marketplace} from "../libraries/LibERC721Marketplace.sol";
-import {LibAavegotchi} from "../libraries/LibAavegotchi.sol";
+import {LibAavegotchi} from "../libraries/LibBasketball.sol";
 import {ILink} from "../interfaces/ILink.sol";
 
 //import "hardhat/console.sol";
