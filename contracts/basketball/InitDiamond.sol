@@ -19,7 +19,7 @@ contract InitDiamond {
         address dfsnft;
         address daiContract;
         bytes32 vrfKeyHash;
-        uint256 chainlinkFee;
+        uint256 vrfFee;
         address vrfCoordinator;
         address linkAddress;
         string name;
@@ -44,7 +44,7 @@ contract InitDiamond {
 
         s.daiContract = _args.daiContract;
         s.vrfKeyHash = _args.vrfKeyHash;
-        s.fee = uint144(_args.chainlinkFee);
+        s.vrfFee = uint144(_args.vrfFee);
         s.vrfCoordinator = _args.vrfCoordinator;
         s.link = ILink(_args.linkAddress);
 

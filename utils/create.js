@@ -22,7 +22,7 @@ async function createDiamond() {
   let linkContract;
   let vrfCoordinator;
   let vrfKeyHash;
-  let fee;
+  let vrfFee;
   let initialReleaseSize;
   let dao;
   let daoTreasury;
@@ -39,7 +39,7 @@ async function createDiamond() {
     vrfCoordinator = await linkAcct.getAddress();
     vrfKeyHash =
       "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
-    fee = hre.ethers.utils.parseEther("0.0001");
+    vrfFee = hre.ethers.utils.parseEther("0.0001");
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
@@ -51,7 +51,7 @@ async function createDiamond() {
     vrfCoordinator = await linkAcct.getAddress();
     vrfKeyHash =
       "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
-    fee = hre.ethers.utils.parseEther("0.0001");
+    vrfFee = hre.ethers.utils.parseEther("0.0001");
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
@@ -63,7 +63,7 @@ async function createDiamond() {
     vrfCoordinator = "0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9";
     vrfKeyHash =
       "0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4";
-    fee = hre.ethers.utils.parseEther("0.1");
+    vrfFee = hre.ethers.utils.parseEther("0.1");
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
@@ -99,7 +99,7 @@ async function createDiamond() {
         dfsnft,
         daiAddress,
         vrfKeyHash,
-        fee,
+        vrfFee,
         vrfCoordinator,
         linkAddress,
         name,

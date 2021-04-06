@@ -133,10 +133,10 @@ contract VrfFacet is Modifiers {
 
     function drawRandomNumber(uint256 _tokenId) internal {
         s.aavegotchis[_tokenId].status = LibAavegotchi.STATUS_VRF_PENDING;
-        uint256 fee = s.fee;
-        require(s.link.balanceOf(address(this)) >= fee, "VrfFacet: Not enough LINK");
+        uint256 vrfFee = s.vrfFee;
+        require(s.link.balanceOf(address(this)) >= vrfFee, "VrfFacet: Not enough LINK");
         bytes32 l_keyHash = s.vrfKeyHash;
-        require(s.link.transferAndCall(s.vrfCoordinator, fee, abi.encode(l_keyHash, 0)), "VrfFacet: link transfer failed");
+        require(s.link.transferAndCall(s.vrfCoordinator, vrfFee, abi.encode(l_keyHash, 0)), "VrfFacet: link transfer failed");
         uint256 vrfSeed = uint256(keccak256(abi.encode(l_keyHash, 0, address(this), s.vrfNonces[l_keyHash])));
         s.vrfNonces[l_keyHash]++;
         bytes32 requestId = keccak256(abi.encodePacked(l_keyHash, vrfSeed));
@@ -196,7 +196,7 @@ contract VrfFacet is Modifiers {
         address _link
     ) external onlyOwner {
         if (_newFee != 0) {
-            s.fee = uint96(_newFee);
+            s.vrfFee = uint96(_newFee);
         }
         if (_vrfKeyHash != 0) {
             s.vrfKeyHash = _vrfKeyHash;

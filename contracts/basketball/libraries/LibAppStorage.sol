@@ -189,7 +189,7 @@ struct AppStorage {
     mapping(bytes32 => uint256) vrfRequestIdToTokenId;
     mapping(bytes32 => uint256) vrfNonces;
     bytes32 vrfKeyHash;
-    uint144 fee;
+    uint144 vrfFee;
     address vrfCoordinator;
     ILink link;
     // Marketplace
