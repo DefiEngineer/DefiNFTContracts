@@ -104,7 +104,7 @@ contract VrfFacet is Modifiers {
         return address(s.link);
     }
 
-    function keyHash() external view returns (bytes32) {
+    function vrfKeyHash() external view returns (bytes32) {
         return s.vrfKeyHash;
     }
 
