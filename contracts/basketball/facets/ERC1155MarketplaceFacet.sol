@@ -171,7 +171,7 @@ contract ERC1155MarketplaceFacet is Modifiers {
         // transfer the amount to burn address
         if (s.listingFeeInWei > 0) {
             // burn address: address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF)
-            LibERC20.transferFrom(s.ghstContract, LibMeta.msgSender(), address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), s.listingFeeInWei);
+            LibERC20.transferFrom(s.daiContract, LibMeta.msgSender(), address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), s.listingFeeInWei);
         }
     }
 
@@ -196,15 +196,15 @@ contract ERC1155MarketplaceFacet is Modifiers {
         require(_quantity <= listing.quantity, "ERC1155Marketplace: quantity is greater than listing");
         listing.quantity -= _quantity;
         uint256 cost = _quantity * _priceInWei;
-        require(IERC20(s.ghstContract).balanceOf(buyer) >= cost, "ERC1155Marketplace: not enough GHST");
+        require(IERC20(s.daiContract).balanceOf(buyer) >= cost, "ERC1155Marketplace: not enough GHST");
         {
             // handles stack too deep error
             uint256 daoShare = cost / 100;
             uint256 companyShare = (cost * 2) / 100;
             uint256 transferAmount = cost - (daoShare + companyShare);
-            LibERC20.transferFrom(s.ghstContract, buyer, s.dfsnft, companyShare);
-            LibERC20.transferFrom(s.ghstContract, buyer, s.daoTreasury, daoShare);
-            LibERC20.transferFrom(s.ghstContract, buyer, seller, transferAmount);
+            LibERC20.transferFrom(s.daiContract, buyer, s.dfsnft, companyShare);
+            LibERC20.transferFrom(s.daiContract, buyer, s.daoTreasury, daoShare);
+            LibERC20.transferFrom(s.daiContract, buyer, seller, transferAmount);
 
             listing.timeLastPurchased = block.timestamp;
             s.nextERC1155ListingId++;

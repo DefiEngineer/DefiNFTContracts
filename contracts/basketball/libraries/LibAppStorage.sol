@@ -178,7 +178,7 @@ struct AppStorage {
     string symbol;
     //Addresses
     address[] collateralTypes;
-    address ghstContract;
+    address daiContract;
     address gameManager;
     address dao;
     address daoTreasury;

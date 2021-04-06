@@ -70,8 +70,8 @@ contract AavegotchiGameFacet is Modifiers {
         portalAavegotchiTraits_ = LibAavegotchi.portalAavegotchiTraits(_tokenId);
     }
 
-    function ghstAddress() external view returns (address contract_) {
-        contract_ = s.ghstContract;
+    function daiAddress() external view returns (address contract_) {
+        contract_ = s.daiContract;
     }
 
     function getNumericTraits(uint256 _tokenId) external view returns (int16[NUMERIC_TRAITS_NUM] memory numericTraits_) {

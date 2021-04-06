@@ -295,10 +295,10 @@ library LibAavegotchi {
 
         // Using 0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF as burn address.
         // GHST token contract does not allow transferring to address(0) address: https://etherscan.io/address/0x3F382DbD960E3a9bbCeaE22651E88158d2791550#code
-        address ghstContract = s.ghstContract;
-        LibERC20.transferFrom(ghstContract, _from, address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), burnShare);
-        LibERC20.transferFrom(ghstContract, _from, s.dfsnft, companyShare);
-        LibERC20.transferFrom(ghstContract, _from, s.dao, daoShare);
+        address daiContract = s.daiContract;
+        LibERC20.transferFrom(daiContract, _from, address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), burnShare);
+        LibERC20.transferFrom(daiContract, _from, s.dfsnft, companyShare);
+        LibERC20.transferFrom(daiContract, _from, s.dao, daoShare);
     }
 
     function sqrt(uint256 x) internal pure returns (uint256 y) {

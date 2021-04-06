@@ -184,7 +184,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         // transfer the amount to burn address
         if (s.listingFeeInWei > 0) {
             // burn address: address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF)
-            LibERC20.transferFrom(s.ghstContract, owner, address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), s.listingFeeInWei);
+            LibERC20.transferFrom(s.daiContract, owner, address(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF), s.listingFeeInWei);
         }
     }
 
@@ -205,7 +205,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         address buyer = LibMeta.msgSender();
         address seller = listing.seller;
         require(seller != buyer, "ERC721Marketplace: buyer can't be seller");
-        require(IERC20(s.ghstContract).balanceOf(buyer) >= priceInWei, "ERC721Marketplace: not enough GHST");
+        require(IERC20(s.daiContract).balanceOf(buyer) >= priceInWei, "ERC721Marketplace: not enough GHST");
 
         listing.timePurchased = block.timestamp;
         LibERC721Marketplace.removeERC721ListingItem(_listingId, seller);
@@ -214,9 +214,9 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 daoShare = priceInWei / 100;
         uint256 companyShare = (priceInWei * 2) / 100;
         uint256 transferAmount = priceInWei - (daoShare + companyShare);
-        LibERC20.transferFrom(s.ghstContract, buyer, s.dfsnft, companyShare);
-        LibERC20.transferFrom(s.ghstContract, buyer, s.daoTreasury, daoShare);
-        LibERC20.transferFrom(s.ghstContract, buyer, seller, transferAmount);
+        LibERC20.transferFrom(s.daiContract, buyer, s.dfsnft, companyShare);
+        LibERC20.transferFrom(s.daiContract, buyer, s.daoTreasury, daoShare);
+        LibERC20.transferFrom(s.daiContract, buyer, seller, transferAmount);
 
         s.aavegotchis[listing.erc721TokenId].locked = false;
 

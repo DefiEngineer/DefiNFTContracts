@@ -8,6 +8,6 @@ struct AppStorage {
     // enables us to add additional map slots here
     bytes32[1000] emptyMapSlots;
     address contractOwner;
-    address ghstContract;
+    address daiContract;
     string name;
 }

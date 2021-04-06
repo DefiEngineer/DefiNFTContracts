@@ -92,7 +92,7 @@ contract ShopFacet {
             totalPrice += quantity * itemType.ghstPrice;
             LibItems.addToOwner(_to, itemId, quantity);
         }
-        uint256 ghstBalance = IERC20(s.ghstContract).balanceOf(sender);
+        uint256 ghstBalance = IERC20(s.daiContract).balanceOf(sender);
         require(ghstBalance >= totalPrice, "ShopFacet: Not enough GHST!");
         emit PurchaseItemsWithGhst(sender, _to, _itemIds, _quantities, totalPrice);
         emit LibERC1155.TransferBatch(sender, address(0), _to, _itemIds, _quantities);
