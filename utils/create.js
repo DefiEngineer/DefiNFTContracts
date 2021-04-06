@@ -75,7 +75,6 @@ async function createDiamond() {
 
   // Get facet names programatically from file directory
   const deployedFacets = await deployFacets([
-    "BridgeFacet",
     "AavegotchiFacet",
     "AavegotchiGameFacet",
     "SvgFacet",
@@ -105,7 +104,6 @@ async function createDiamond() {
         fee,
         vrfCoordinator,
         linkAddress,
-        deployerAddr,
         name,
         symbol,
       ],

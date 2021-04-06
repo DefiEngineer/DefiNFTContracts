@@ -23,7 +23,6 @@ contract InitDiamond {
         uint256 chainlinkFee;
         address vrfCoordinator;
         address linkAddress;
-        address childChainManager;
         string name;
         string symbol;
     }
@@ -34,7 +33,6 @@ contract InitDiamond {
         s.rarityFarming = _args.rarityFarming;
         s.pixelCraft = _args.pixelCraft;
         s.itemsBaseUri = "https://ipfs.io/ipfs/";
-        s.childChainManager = _args.childChainManager;
 
         s.domainSeparator = LibMeta.domainSeparator("BasketballDiamond", "V1");
 
