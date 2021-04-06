@@ -188,7 +188,7 @@ struct AppStorage {
     //VRF
     mapping(bytes32 => uint256) vrfRequestIdToTokenId;
     mapping(bytes32 => uint256) vrfNonces;
-    bytes32 keyHash;
+    bytes32 vrfKeyHash;
     uint144 fee;
     address vrfCoordinator;
     ILink link;

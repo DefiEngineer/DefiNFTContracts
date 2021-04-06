@@ -105,7 +105,7 @@ contract VrfFacet is Modifiers {
     }
 
     function keyHash() external view returns (bytes32) {
-        return s.keyHash;
+        return s.vrfKeyHash;
     }
 
     /***********************************|
@@ -135,7 +135,7 @@ contract VrfFacet is Modifiers {
         s.aavegotchis[_tokenId].status = LibAavegotchi.STATUS_VRF_PENDING;
         uint256 fee = s.fee;
         require(s.link.balanceOf(address(this)) >= fee, "VrfFacet: Not enough LINK");
-        bytes32 l_keyHash = s.keyHash;
+        bytes32 l_keyHash = s.vrfKeyHash;
         require(s.link.transferAndCall(s.vrfCoordinator, fee, abi.encode(l_keyHash, 0)), "VrfFacet: link transfer failed");
         uint256 vrfSeed = uint256(keccak256(abi.encode(l_keyHash, 0, address(this), s.vrfNonces[l_keyHash])));
         s.vrfNonces[l_keyHash]++;
@@ -191,15 +191,15 @@ contract VrfFacet is Modifiers {
 
     function changeVrf(
         uint256 _newFee,
-        bytes32 _keyHash,
+        bytes32 _vrfKeyHash,
         address _vrfCoordinator,
         address _link
     ) external onlyOwner {
         if (_newFee != 0) {
             s.fee = uint96(_newFee);
         }
-        if (_keyHash != 0) {
-            s.keyHash = _keyHash;
+        if (_vrfKeyHash != 0) {
+            s.vrfKeyHash = _vrfKeyHash;
         }
         if (_vrfCoordinator != address(0)) {
             s.vrfCoordinator = _vrfCoordinator;

@@ -2,7 +2,7 @@
 pragma solidity 0.8.3;
 
 contract LinkTokenMock {
-    bytes32 keyHash;
+    bytes32 vrfKeyHash;
     uint256 seed;
     address requester;
     mapping(bytes32 => uint256) nonces;
@@ -14,9 +14,9 @@ contract LinkTokenMock {
     ) external returns (bool) {
         _to;
         _value;
-        (keyHash, seed) = abi.decode(_data, (bytes32, uint256));
+        (vrfKeyHash, seed) = abi.decode(_data, (bytes32, uint256));
         requester = msg.sender;
-        nonces[keyHash]++;
+        nonces[vrfKeyHash]++;
         return true;
     }
 
@@ -26,7 +26,7 @@ contract LinkTokenMock {
     }
 
     function getRequestId() external view returns (bytes32 requestId_) {
-        bytes32 input = keccak256(abi.encode(keyHash, seed, requester, nonces[keyHash] - 1));
-        requestId_ = keccak256(abi.encodePacked(keyHash, input));
+        bytes32 input = keccak256(abi.encode(vrfKeyHash, seed, requester, nonces[vrfKeyHash] - 1));
+        requestId_ = keccak256(abi.encodePacked(vrfKeyHash, input));
     }
 }

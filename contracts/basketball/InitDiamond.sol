@@ -18,7 +18,7 @@ contract InitDiamond {
         address daoTreasury;
         address dfsnft;
         address daiContract;
-        bytes32 chainlinkKeyHash;
+        bytes32 vrfKeyHash;
         uint256 chainlinkFee;
         address vrfCoordinator;
         address linkAddress;
@@ -43,7 +43,7 @@ contract InitDiamond {
         ds.supportedInterfaces[type(IERC173).interfaceId] = true;
 
         s.daiContract = _args.daiContract;
-        s.keyHash = _args.chainlinkKeyHash;
+        s.vrfKeyHash = _args.vrfKeyHash;
         s.fee = uint144(_args.chainlinkFee);
         s.vrfCoordinator = _args.vrfCoordinator;
         s.link = ILink(_args.linkAddress);
