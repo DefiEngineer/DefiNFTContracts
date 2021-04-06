@@ -17,7 +17,6 @@ contract InitDiamond {
         address dao;
         address daoTreasury;
         address dfsnft;
-        address rarityFarming;
         address ghstContract;
         bytes32 chainlinkKeyHash;
         uint256 chainlinkFee;
@@ -30,7 +29,6 @@ contract InitDiamond {
     function init(Args memory _args) external {
         s.dao = _args.dao;
         s.daoTreasury = _args.daoTreasury;
-        s.rarityFarming = _args.rarityFarming;
         s.dfsnft = _args.dfsnft;
         s.itemsBaseUri = "https://ipfs.io/ipfs/";
 

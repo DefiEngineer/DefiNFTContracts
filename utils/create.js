@@ -8,7 +8,6 @@ async function createDiamond() {
     deployer,
     linkAcct,
     daoAcct,
-    farmingAcct,
     companyAcct,
   ] = await hre.ethers.getSigners();
   const deployerAddr = await deployer.getAddress();
@@ -27,7 +26,6 @@ async function createDiamond() {
   let initialReleaseSize;
   let dao;
   let daoTreasury;
-  let rarityFarming;
   let dfsnft;
 
   if (network === "hardhat") {
@@ -43,7 +41,6 @@ async function createDiamond() {
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
-    rarityFarming = await farmingAcct.getAddress();
     dfsnft = await companyAcct.getAddress();
   } else if (network === "localhost") {
     linkAddress = "0x514910771af9ca656af840dff83e8264ecf986ca";
@@ -55,7 +52,6 @@ async function createDiamond() {
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
-    rarityFarming = await farmingAcct.getAddress();
     dfsnft = await companyAcct.getAddress();
   } else if (network === "kovan") {
     linkAddress = "0xa36085f69e2889c224210f603d836748e7dc0088";
@@ -67,7 +63,6 @@ async function createDiamond() {
     initialReleaseSize = "10000";
     dao = await daoAcct.getAddress();
     daoTreasury = dao;
-    rarityFarming = await farmingAcct.getAddress();
     dfsnft = await companyAcct.getAddress();
   } else {
     throw Error(`No network settings available for ${network}.`);
@@ -98,7 +93,6 @@ async function createDiamond() {
         dao,
         daoTreasury,
         dfsnft,
-        rarityFarming,
         linkAddress,
         keyHash,
         fee,

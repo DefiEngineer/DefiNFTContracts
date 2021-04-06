@@ -183,7 +183,6 @@ struct AppStorage {
     address dao;
     address daoTreasury;
     address dfsnft;
-    address rarityFarming;
     string itemsBaseUri;
     bytes32 domainSeparator;
     //VRF
