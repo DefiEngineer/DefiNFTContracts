@@ -36,7 +36,7 @@ contract InitDiamond {
         s.itemsBaseUri = "https://ipfs.io/ipfs/";
         s.childChainManager = _args.childChainManager;
 
-        s.domainSeparator = LibMeta.domainSeparator("AavegotchiDiamond", "V1");
+        s.domainSeparator = LibMeta.domainSeparator("BasketballDiamond", "V1");
 
         LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
 
