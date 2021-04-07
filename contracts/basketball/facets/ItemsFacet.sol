@@ -182,7 +182,7 @@ contract ItemsFacet is Modifiers {
         Card storage aavegotchi = s.aavegotchis[_tokenId];
         address sender = LibMeta.msgSender();
 
-        uint256 aavegotchiLevel = LibBasketball.aavegotchiLevel(aavegotchi.experience);
+        uint256 aavegotchiLevel = LibBasketball.cardLevel(aavegotchi.experience);
 
         for (uint256 slot; slot < EQUIPPED_WEARABLE_SLOTS; slot++) {
             uint256 wearableId = _equippedWearables[slot];

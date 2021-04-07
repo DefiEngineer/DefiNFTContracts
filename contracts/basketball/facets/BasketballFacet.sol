@@ -29,7 +29,7 @@ contract BasketballFacet {
     }
 
     function getCard(uint256 _tokenId) external view returns (CardInfo memory aavegotchiInfo_) {
-        aavegotchiInfo_ = LibBasketball.getAavegotchi(_tokenId);
+        aavegotchiInfo_ = LibBasketball.getCard(_tokenId);
     }
 
     // /// @notice Enumerate valid NFTs
@@ -62,7 +62,7 @@ contract BasketballFacet {
         uint256 length = s.ownerTokenIds[_owner].length;
         aavegotchiInfos_ = new CardInfo[](length);
         for (uint256 i; i < length; i++) {
-            aavegotchiInfos_[i] = LibBasketball.getAavegotchi(s.ownerTokenIds[_owner][i]);
+            aavegotchiInfos_[i] = LibBasketball.getCard(s.ownerTokenIds[_owner][i]);
         }
     }
 

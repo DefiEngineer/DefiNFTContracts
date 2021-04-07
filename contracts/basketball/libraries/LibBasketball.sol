@@ -69,7 +69,7 @@ library LibBasketball {
     uint8 constant STATUS_OPEN_PORTAL = 2;
     uint8 constant STATUS_AAVEGOTCHI = 3;
 
-    event AavegotchiInteract(uint256 indexed _tokenId, uint256 kinship);
+    event CardInteract(uint256 indexed _tokenId, uint256 kinship);
 
     function toNumericTraits(uint256 _randomNumber, int16[NUMERIC_TRAITS_NUM] memory _modifiers)
         internal
@@ -97,7 +97,7 @@ library LibBasketball {
         else if (rarityScore >= 581) return 1000;
     }
 
-    function singlePortalAavegotchiTraits(uint256 _randomNumber, uint256 _option)
+    function singleCardPackTraits(uint256 _randomNumber, uint256 _option)
         internal
         view
         returns (InternalCardPackTraitsIO memory singlePortalAavegotchiTraits_)
@@ -122,18 +122,18 @@ library LibBasketball {
         singlePortalAavegotchiTraits_.minimumStake = collateralDAIPrice * multiplier;
     }
 
-    function portalAavegotchiTraits(uint256 _tokenId)
+    function cardPackTraits(uint256 _tokenId)
         internal
         view
         returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "LibBasketball: Portal not open");
+        require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "LibBasketball: Pack not open");
 
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
         for (uint256 i; i < portalAavegotchiTraits_.length; i++) {
-            InternalCardPackTraitsIO memory single = singlePortalAavegotchiTraits(randomNumber, i);
+            InternalCardPackTraitsIO memory single = singleCardPackTraits(randomNumber, i);
             portalAavegotchiTraits_[i].randomNumber = single.randomNumber;
             portalAavegotchiTraits_[i].collateralType = single.collateralType;
             portalAavegotchiTraits_[i].minimumStake = single.minimumStake;
@@ -141,7 +141,7 @@ library LibBasketball {
         }
     }
 
-    function getAavegotchi(uint256 _tokenId) internal view returns (CardInfo memory aavegotchiInfo_) {
+    function getCard(uint256 _tokenId) internal view returns (CardInfo memory aavegotchiInfo_) {
         AppStorage storage s = LibAppStorage.diamondStorage();
         aavegotchiInfo_.tokenId = _tokenId;
         aavegotchiInfo_.owner = s.aavegotchis[_tokenId].owner;
@@ -155,11 +155,11 @@ library LibBasketball {
             aavegotchiInfo_.escrow = s.aavegotchis[_tokenId].escrow;
             aavegotchiInfo_.stakedAmount = IERC20(aavegotchiInfo_.collateral).balanceOf(aavegotchiInfo_.escrow);
             aavegotchiInfo_.minimumStake = s.aavegotchis[_tokenId].minimumStake;
-            aavegotchiInfo_.kinship = kinship(_tokenId);
+            aavegotchiInfo_.kinship = morale(_tokenId);
             aavegotchiInfo_.lastInteracted = s.aavegotchis[_tokenId].lastInteracted;
             aavegotchiInfo_.experience = s.aavegotchis[_tokenId].experience;
             aavegotchiInfo_.toNextLevel = xpUntilNextLevel(s.aavegotchis[_tokenId].experience);
-            aavegotchiInfo_.level = aavegotchiLevel(s.aavegotchis[_tokenId].experience);
+            aavegotchiInfo_.level = cardLevel(s.aavegotchis[_tokenId].experience);
             aavegotchiInfo_.usedSkillPoints = s.aavegotchis[_tokenId].usedSkillPoints;
             aavegotchiInfo_.numericTraits = s.aavegotchis[_tokenId].numericTraits;
             aavegotchiInfo_.baseRarityScore = baseRarityScore(aavegotchiInfo_.numericTraits);
@@ -213,7 +213,7 @@ library LibBasketball {
         }
     }
 
-    function kinship(uint256 _tokenId) internal view returns (uint256 score_) {
+    function morale(uint256 _tokenId) internal view returns (uint256 score_) {
         AppStorage storage s = LibAppStorage.diamondStorage();
         Card storage aavegotchi = s.aavegotchis[_tokenId];
         uint256 lastInteracted = aavegotchi.lastInteracted;
@@ -228,11 +228,11 @@ library LibBasketball {
     }
 
     function xpUntilNextLevel(uint256 _experience) internal pure returns (uint256 requiredXp_) {
-        uint256 currentLevel = aavegotchiLevel(_experience);
+        uint256 currentLevel = cardLevel(_experience);
         requiredXp_ = ((currentLevel**2) * 50) - _experience;
     }
 
-    function aavegotchiLevel(uint256 _experience) internal pure returns (uint256 level_) {
+    function cardLevel(uint256 _experience) internal pure returns (uint256 level_) {
         if (_experience > 490050) {
             return 99;
         }
@@ -266,7 +266,7 @@ library LibBasketball {
         s.aavegotchis[_tokenId].interactionCount = l_kinship;
 
         s.aavegotchis[_tokenId].lastInteracted = uint40(block.timestamp);
-        emit AavegotchiInteract(_tokenId, l_kinship);
+        emit CardInteract(_tokenId, l_kinship);
     }
 
     //Calculates the base rarity score, including collateral modifier

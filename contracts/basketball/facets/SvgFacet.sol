@@ -265,7 +265,7 @@ contract SvgFacet is Modifiers {
 
     function cardPacksSvg(uint256 _tokenId) external view returns (string[PORTAL_AAVEGOTCHIS_NUM] memory svg_) {
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "SvgFacet: Portal not open");
-        CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory l_portalAavegotchiTraits = LibBasketball.portalAavegotchiTraits(_tokenId);
+        CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory l_portalAavegotchiTraits = LibBasketball.cardPackTraits(_tokenId);
         for (uint256 i; i < svg_.length; i++) {
             address collateralType = l_portalAavegotchiTraits[i].collateralType;
             svg_[i] = string(

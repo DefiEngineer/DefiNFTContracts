@@ -36,7 +36,7 @@ contract ERC721MarketplaceFacet is Modifiers {
     function getCardListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, CardInfo memory aavegotchiInfo_) {
         listing_ = s.erc721Listings[_listingId];
         require(listing_.timeCreated != 0, "ERC721Marketplace: ERC721 listing does not exist");
-        aavegotchiInfo_ = LibBasketball.getAavegotchi(listing_.erc721TokenId);
+        aavegotchiInfo_ = LibBasketball.getCard(listing_.erc721TokenId);
     }
 
     function getERC721Listing(uint256 _listingId) external view returns (ERC721Listing memory listing_) {
@@ -89,7 +89,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
             listings_[listIndex].listing_ = listing;
-            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getAavegotchi(listing.erc721TokenId);
+            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getCard(listing.erc721TokenId);
             listingId = s.erc721OwnerListingListItem[listingId].childListingId;
         }
         assembly {
@@ -125,7 +125,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
             listings_[listIndex].listing_ = listing;
-            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getAavegotchi(listing.erc721TokenId);
+            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getCard(listing.erc721TokenId);
             listingId = s.erc721ListingListItem[listingId].childListingId;
         }
         assembly {

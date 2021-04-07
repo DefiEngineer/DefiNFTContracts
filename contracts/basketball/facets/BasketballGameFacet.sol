@@ -66,7 +66,7 @@ contract BasketballGameFacet is Modifiers {
         view
         returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
-        portalAavegotchiTraits_ = LibBasketball.portalAavegotchiTraits(_tokenId);
+        portalAavegotchiTraits_ = LibBasketball.cardPackTraits(_tokenId);
     }
 
     function daiAddress() external view returns (address contract_) {
@@ -78,7 +78,7 @@ contract BasketballGameFacet is Modifiers {
     }
 
     function availableSkillPoints(uint256 _tokenId) public view returns (uint256) {
-        uint256 level = LibBasketball.aavegotchiLevel(s.aavegotchis[_tokenId].experience);
+        uint256 level = LibBasketball.cardLevel(s.aavegotchis[_tokenId].experience);
         uint256 skillPoints = (level / 3);
         uint256 usedSkillPoints = s.aavegotchis[_tokenId].usedSkillPoints;
         require(skillPoints >= usedSkillPoints, "BasketballGameFacet: Used skill points is greater than skill points");
@@ -86,7 +86,7 @@ contract BasketballGameFacet is Modifiers {
     }
 
     function cardLevel(uint256 _experience) external pure returns (uint256 level_) {
-        level_ = LibBasketball.aavegotchiLevel(_experience);
+        level_ = LibBasketball.cardLevel(_experience);
     }
 
     function xpUntilNextLevel(uint256 _experience) external pure returns (uint256 requiredXp_) {
@@ -112,7 +112,7 @@ contract BasketballGameFacet is Modifiers {
     }
 
     function morale(uint256 _tokenId) external view returns (uint256 score_) {
-        score_ = LibBasketball.kinship(_tokenId);
+        score_ = LibBasketball.morale(_tokenId);
     }
 
     function claimCard(
@@ -125,7 +125,7 @@ contract BasketballGameFacet is Modifiers {
         require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
-        InternalCardPackTraitsIO memory option = LibBasketball.singlePortalAavegotchiTraits(randomNumber, _option);
+        InternalCardPackTraitsIO memory option = LibBasketball.singleCardPackTraits(randomNumber, _option);
         aavegotchi.randomNumber = option.randomNumber;
         aavegotchi.numericTraits = option.numericTraits;
         aavegotchi.collateralType = option.collateralType;
@@ -159,7 +159,7 @@ contract BasketballGameFacet is Modifiers {
         emit SetCardName(_tokenId, existingName, _name);
     }
 
-    function train(uint256[] calldata _tokenIds) external {
+    function interact(uint256[] calldata _tokenIds) external {
         address sender = LibMeta.msgSender();
         for (uint256 i; i < _tokenIds.length; i++) {
             uint256 tokenId = _tokenIds[i];
