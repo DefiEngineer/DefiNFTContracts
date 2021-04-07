@@ -2,7 +2,7 @@
 pragma solidity 0.8.3;
 
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {LibBasketball, AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
+import {LibBasketball, CardCollateralTypeIO} from "../libraries/LibBasketball.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
@@ -24,16 +24,16 @@ contract CollateralFacet is Modifiers {
         collateralTypes_ = s.collateralTypes;
     }
 
-    function collateralInfo(uint256 _collateralId) external view returns (AavegotchiCollateralTypeIO memory collateralInfo_) {
+    function collateralInfo(uint256 _collateralId) external view returns (CardCollateralTypeIO memory collateralInfo_) {
         address collateral = s.collateralTypes[_collateralId];
-        collateralInfo_ = AavegotchiCollateralTypeIO(collateral, s.collateralTypeInfo[collateral]);
+        collateralInfo_ = CardCollateralTypeIO(collateral, s.collateralTypeInfo[collateral]);
         return collateralInfo_;
     }
 
-    function getCollateralInfo() external view returns (AavegotchiCollateralTypeIO[] memory collateralInfo_) {
+    function getCollateralInfo() external view returns (CardCollateralTypeIO[] memory collateralInfo_) {
         address[] memory collateralTypes = s.collateralTypes;
 
-        collateralInfo_ = new AavegotchiCollateralTypeIO[](collateralTypes.length);
+        collateralInfo_ = new CardCollateralTypeIO[](collateralTypes.length);
 
         for (uint256 i; i < collateralTypes.length; i++) {
             address collateral = collateralTypes[i];

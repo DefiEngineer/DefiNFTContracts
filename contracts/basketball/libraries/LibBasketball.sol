@@ -18,7 +18,7 @@ import {IERC721} from "../../shared/interfaces/IERC721.sol";
 import {LibERC721} from "../../shared/libraries/LibERC721.sol";
 import {LibItems, ItemTypeIO} from "../libraries/LibItems.sol";
 
-struct AavegotchiCollateralTypeIO {
+struct CardCollateralTypeIO {
     address collateralType;
     CardCollateralTypeInfo collateralTypeInfo;
 }

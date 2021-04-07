@@ -3,7 +3,7 @@ pragma solidity 0.8.3;
 
 import {ItemType, WearableSet, NUMERIC_TRAITS_NUM} from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
+import {CardCollateralTypeIO} from "../libraries/LibBasketball.sol";
 import {LibERC1155} from "../../shared/libraries/LibERC1155.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {LibSvg} from "../libraries/LibSVG.sol";
@@ -13,7 +13,7 @@ contract DAOFacet is Modifiers {
     event DaoTransferred(address indexed previousDao, address indexed newDao);
     event DaoTreasuryTransferred(address indexed previousDaoTreasury, address indexed newDaoTreasury);
     event UpdateCollateralModifiers(int16[NUMERIC_TRAITS_NUM] _oldModifiers, int16[NUMERIC_TRAITS_NUM] _newModifiers);
-    event AddCollateralType(AavegotchiCollateralTypeIO _collateralType);
+    event AddCollateralType(CardCollateralTypeIO _collateralType);
     event AddItemType(ItemType _itemType);
     event CreateHaunt(uint256 indexed _hauntId, uint256 _hauntMaxSize, uint256 _portalPrice, bytes32 _bodyColor, string _image);
     event GrantExperience(uint256[] _tokenIds, uint256[] _xpValues);
@@ -32,7 +32,7 @@ contract DAOFacet is Modifiers {
         s.daoTreasury = _newDaoTreasury;
     }
 
-    function addCollateralTypes(AavegotchiCollateralTypeIO[] calldata _collateralTypes) external onlyDaoOrOwner {
+    function addCollateralTypes(CardCollateralTypeIO[] calldata _collateralTypes) external onlyDaoOrOwner {
         for (uint256 i; i < _collateralTypes.length; i++) {
             address collateralType = _collateralTypes[i].collateralType;
 
