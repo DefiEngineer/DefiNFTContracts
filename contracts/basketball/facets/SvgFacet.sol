@@ -156,7 +156,7 @@ contract SvgFacet is Modifiers {
                     "</style>"
                 );
         } else {
-            //Normal Aavegotchi, closed hands
+            //Normal Card, closed hands
             return
                 abi.encodePacked(
                     "<style>.gotchi-primary{fill:#",

@@ -193,7 +193,7 @@ contract BasketballFacet {
     }
 
     function name() external view returns (string memory) {
-        // return "Aavegotchi";
+        // return "Card";
         return s.name;
     }
 

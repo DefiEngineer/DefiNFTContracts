@@ -6,7 +6,7 @@ import {
     LibAppStorage,
     CardCollateralTypeInfo,
     AppStorage,
-    Aavegotchi,
+    Card,
     ItemType,
     NUMERIC_TRAITS_NUM,
     EQUIPPED_WEARABLE_SLOTS,
@@ -36,9 +36,9 @@ struct AavegotchiInfo {
     address escrow;
     uint256 stakedAmount;
     uint256 minimumStake;
-    uint256 kinship; //The kinship value of this Aavegotchi. Default is 50.
+    uint256 kinship; //The kinship value of this Card. Default is 50.
     uint256 lastInteracted;
-    uint256 experience; //How much XP this Aavegotchi has accrued. Begins at 0.
+    uint256 experience; //How much XP this Card has accrued. Begins at 0.
     uint256 toNextLevel;
     uint256 usedSkillPoints; //number of skill points used
     uint256 level; //the current aavegotchi level
@@ -177,7 +177,7 @@ library LibBasketball {
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
         require(s.aavegotchis[_tokenId].status == STATUS_AAVEGOTCHI, "LibBasketball: Must be claimed");
-        Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
+        Card storage aavegotchi = s.aavegotchis[_tokenId];
         numericTraits_ = getNumericTraits(_tokenId);
         uint256 wearableBonus;
         for (uint256 slot; slot < EQUIPPED_WEARABLE_SLOTS; slot++) {
@@ -215,7 +215,7 @@ library LibBasketball {
 
     function kinship(uint256 _tokenId) internal view returns (uint256 score_) {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
+        Card storage aavegotchi = s.aavegotchis[_tokenId];
         uint256 lastInteracted = aavegotchi.lastInteracted;
         uint256 interactionCount = aavegotchi.interactionCount;
         uint256 interval = block.timestamp - lastInteracted;
@@ -321,7 +321,7 @@ library LibBasketball {
         require(char != 32, "LibBasketball: last char of name can't be a space");
         for (uint256 i; i < len; i++) {
             char = uint256(uint8(name[i]));
-            require(char > 31 && char < 127, "LibBasketball: invalid character in Aavegotchi name.");
+            require(char > 31 && char < 127, "LibBasketball: invalid character in Card name.");
             if (char < 91 && char > 64) {
                 name[i] = bytes1(uint8(char + 32));
             }

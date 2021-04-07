@@ -25,26 +25,26 @@ uint256 constant PORTAL_AAVEGOTCHIS_NUM = 10;
 //         case 5:
 //             return eyeColor(value);
 
-struct Aavegotchi {
-    uint16[EQUIPPED_WEARABLE_SLOTS] equippedWearables; //The currently equipped wearables of the Aavegotchi
+struct Card {
+    uint16[EQUIPPED_WEARABLE_SLOTS] equippedWearables; //The currently equipped wearables of the Card
     // [Experience, Rarity Score, Kinship, Eye Color, Eye Shape, Brain Size, Spookiness, Aggressiveness, Energy]
     int8[NUMERIC_TRAITS_NUM] temporaryTraitBoosts;
     int16[NUMERIC_TRAITS_NUM] numericTraits; // Sixteen 16 bit ints.  [Eye Color, Eye Shape, Brain Size, Spookiness, Aggressiveness, Energy]
     string name;
     uint256 randomNumber;
-    uint256 experience; //How much XP this Aavegotchi has accrued. Begins at 0.
+    uint256 experience; //How much XP this Card has accrued. Begins at 0.
     uint256 minimumStake; //The minimum amount of collateral that must be staked. Set upon creation.
     uint256 usedSkillPoints; //The number of skill points this aavegotchi has already used
-    uint256 interactionCount; //How many times the owner of this Aavegotchi has interacted with it.
+    uint256 interactionCount; //How many times the owner of this Card has interacted with it.
     address collateralType;
-    uint40 claimTime; //The block timestamp when this Aavegotchi was claimed
+    uint40 claimTime; //The block timestamp when this Card was claimed
     uint40 lastTemporaryBoost;
     uint16 hauntId;
     address owner;
-    uint8 status; // 0 == portal, 1 == VRF_PENDING, 2 == open portal, 3 == Aavegotchi
-    uint40 lastInteracted; //The last time this Aavegotchi was interacted with
+    uint8 status; // 0 == portal, 1 == VRF_PENDING, 2 == open portal, 3 == Card
+    uint40 lastInteracted; //The last time this Card was interacted with
     bool locked;
-    address escrow; //The escrow address this Aavegotchi manages.
+    address escrow; //The escrow address this Card manages.
 }
 
 struct Dimensions {
@@ -74,7 +74,7 @@ struct ItemType {
     uint8 rarityScoreModifier; //Number from 1-50.
     // Each bit is a slot position. 1 is true, 0 is false
     bool canPurchaseWithGhst;
-    uint16 minLevel; //The minimum Aavegotchi level required to use this item. Default is 1.
+    uint16 minLevel; //The minimum Card level required to use this item. Default is 1.
     bool canBeTransferred;
     uint8 category; // 0 is wearable, 1 is badge, 2 is consumable
     int16 kinshipBonus; //[CONSUMABLE ONLY] How much this consumable boosts (or reduces) kinship score
@@ -89,8 +89,8 @@ struct WearableSet {
     int8[TRAIT_BONUSES_NUM] traitsBonuses;
 }
 
-struct Haunt {
-    uint256 hauntMaxSize; //The max size of the Haunt
+struct Release {
+    uint256 hauntMaxSize; //The max size of the Release
     uint256 portalPrice;
     bytes3 bodyColor;
     uint24 totalCount;
@@ -134,7 +134,7 @@ struct ERC721Listing {
     address seller;
     address erc721TokenAddress;
     uint256 erc721TokenId;
-    uint256 category; // 0 is closed portal, 1 is vrf pending, 2 is open portal, 3 is Aavegotchi
+    uint256 category; // 0 is closed portal, 1 is vrf pending, 2 is open portal, 3 is Card
     uint256 priceInWei;
     uint256 timeCreated;
     uint256 timePurchased;
@@ -157,13 +157,13 @@ struct AppStorage {
     mapping(address => mapping(uint256 => mapping(uint256 => uint256))) nftItemIndexes;
     ItemType[] itemTypes;
     WearableSet[] wearableSets;
-    mapping(uint256 => Haunt) haunts;
+    mapping(uint256 => Release) haunts;
     mapping(address => mapping(uint256 => uint256)) ownerItemBalances;
     mapping(address => uint256[]) ownerItems;
     // indexes are stored 1 higher so that 0 means no items in items array
     mapping(address => mapping(uint256 => uint256)) ownerItemIndexes;
     mapping(uint256 => uint256) tokenIdToRandomNumber;
-    mapping(uint256 => Aavegotchi) aavegotchis;
+    mapping(uint256 => Card) aavegotchis;
     mapping(address => uint32[]) ownerTokenIds;
     mapping(address => mapping(uint256 => uint256)) ownerTokenIdIndexes;
     uint32[] tokenIds;

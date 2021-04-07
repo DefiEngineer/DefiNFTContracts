@@ -14,7 +14,7 @@ import {LibAppStorage} from "../libraries/LibAppStorage.sol";
 
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
-import {Haunt, Aavegotchi} from "../libraries/LibAppStorage.sol";
+import {Release, Card} from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 // import "hardhat/console.sol";
@@ -46,7 +46,7 @@ contract BasketballGameFacet is Modifiers {
         available_ = s.aavegotchiNamesUsed[LibBasketball.validateAndLowerName(_name)];
     }
 
-    function currentHaunt() external view returns (uint256 hauntId_, Haunt memory haunt_) {
+    function currentHaunt() external view returns (uint256 hauntId_, Release memory haunt_) {
         hauntId_ = s.currentHauntId;
         haunt_ = s.haunts[hauntId_];
     }
@@ -120,7 +120,7 @@ contract BasketballGameFacet is Modifiers {
         uint256 _option,
         uint256 _stakeAmount
     ) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
-        Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
+        Card storage aavegotchi = s.aavegotchis[_tokenId];
         require(aavegotchi.status == LibBasketball.STATUS_OPEN_PORTAL, "BasketballGameFacet: Portal not open");
         require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
@@ -147,13 +147,13 @@ contract BasketballGameFacet is Modifiers {
     }
 
     function setAavegotchiName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
-        require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_AAVEGOTCHI, "BasketballGameFacet: Must claim Aavegotchi before setting name");
+        require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_AAVEGOTCHI, "BasketballGameFacet: Must claim Card before setting name");
         string memory lowerName = LibBasketball.validateAndLowerName(_name);
         string memory existingName = s.aavegotchis[_tokenId].name;
         if (bytes(existingName).length > 0) {
             delete s.aavegotchiNamesUsed[LibBasketball.validateAndLowerName(existingName)];
         }
-        require(!s.aavegotchiNamesUsed[lowerName], "BasketballGameFacet: Aavegotchi name used already");
+        require(!s.aavegotchiNamesUsed[lowerName], "BasketballGameFacet: Card name used already");
         s.aavegotchiNamesUsed[lowerName] = true;
         s.aavegotchis[_tokenId].name = _name;
         emit SetAavegotchiName(_tokenId, existingName, _name);

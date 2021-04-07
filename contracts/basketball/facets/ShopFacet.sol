@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {AppStorage, ItemType, Haunt} from "../libraries/LibAppStorage.sol";
+import {AppStorage, ItemType, Release} from "../libraries/LibAppStorage.sol";
 import {LibBasketball} from "../libraries/LibBasketball.sol";
 // import "hardhat/console.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
@@ -28,7 +28,7 @@ contract ShopFacet {
 
     function buyPortals(address _to, uint256 _ghst) external {
         uint256 currentHauntId = s.currentHauntId;
-        Haunt storage haunt = s.haunts[currentHauntId];
+        Release storage haunt = s.haunts[currentHauntId];
         uint256 price = haunt.portalPrice;
         require(_ghst >= price, "Not enough GHST to buy portals");
         uint256[3] memory tiers;

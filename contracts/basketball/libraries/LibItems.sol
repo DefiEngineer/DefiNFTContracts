@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibAppStorage, AppStorage, ItemType, Aavegotchi, EQUIPPED_WEARABLE_SLOTS} from "./LibAppStorage.sol";
+import {LibAppStorage, AppStorage, ItemType, Card, EQUIPPED_WEARABLE_SLOTS} from "./LibAppStorage.sol";
 import {LibERC1155} from "../../shared/libraries/LibERC1155.sol";
 
 struct ItemTypeIO {
@@ -120,7 +120,7 @@ library LibItems {
             }
         }
         if (_fromContract == address(this) && bal == 1) {
-            Aavegotchi storage aavegotchi = s.aavegotchis[_fromTokenId];
+            Card storage aavegotchi = s.aavegotchis[_fromTokenId];
             if (
                 aavegotchi.equippedWearables[LibItems.WEARABLE_SLOT_HAND_LEFT] == _id &&
                 aavegotchi.equippedWearables[LibItems.WEARABLE_SLOT_HAND_RIGHT] == _id

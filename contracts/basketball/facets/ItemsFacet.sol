@@ -5,7 +5,7 @@ import {LibItems, ItemTypeIO} from "../libraries/LibItems.sol";
 import {
     LibAppStorage,
     ItemType,
-    Aavegotchi,
+    Card,
     ItemType,
     WearableSet,
     NUMERIC_TRAITS_NUM,
@@ -179,7 +179,7 @@ contract ItemsFacet is Modifiers {
    |__________________________________*/
 
     function equipWearables(uint256 _tokenId, uint16[EQUIPPED_WEARABLE_SLOTS] calldata _equippedWearables) external onlyCardOwner(_tokenId) {
-        Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
+        Card storage aavegotchi = s.aavegotchis[_tokenId];
         address sender = LibMeta.msgSender();
 
         uint256 aavegotchiLevel = LibBasketball.aavegotchiLevel(aavegotchi.experience);
@@ -191,7 +191,7 @@ contract ItemsFacet is Modifiers {
                 continue;
             }
             ItemType storage itemType = s.itemTypes[wearableId];
-            require(aavegotchiLevel >= itemType.minLevel, "ItemsFacet: Aavegotchi level lower than minLevel");
+            require(aavegotchiLevel >= itemType.minLevel, "ItemsFacet: Card level lower than minLevel");
             require(itemType.category == LibItems.ITEM_CATEGORY_WEARABLE, "ItemsFacet: Only wearables can be equippped");
             require(itemType.slotPositions[slot] == true, "ItemsFacet: Wearable cannot be equipped in this slot");
             {
@@ -224,7 +224,7 @@ contract ItemsFacet is Modifiers {
                 require(nftBalance + ownerBalance >= neededBalance, "ItemsFacet: Wearable is not in inventories");
                 uint256 balToTransfer = neededBalance - nftBalance;
 
-                //Transfer to Aavegotchi
+                //Transfer to Card
                 LibItems.removeFromOwner(sender, wearableId, balToTransfer);
                 LibItems.addToParent(address(this), _tokenId, wearableId, balToTransfer);
                 emit TransferToParent(address(this), _tokenId, wearableId, balToTransfer);
