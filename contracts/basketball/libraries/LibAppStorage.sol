@@ -102,7 +102,7 @@ struct SvgLayer {
     uint16 size;
 }
 
-struct AavegotchiCollateralTypeInfo {
+struct CardCollateralTypeInfo {
     // treated as an arary of int8
     int16[NUMERIC_TRAITS_NUM] modifiers; //Trait modifiers for each collateral. Can be 2, 1, -1, or -2
     bytes3 primaryColor;
@@ -148,7 +148,7 @@ struct ListingListItem {
 }
 
 struct AppStorage {
-    mapping(address => AavegotchiCollateralTypeInfo) collateralTypeInfo;
+    mapping(address => CardCollateralTypeInfo) collateralTypeInfo;
     mapping(address => uint256) collateralTypeIndexes;
     mapping(bytes32 => SvgLayer[]) svgLayers;
     mapping(address => mapping(uint256 => mapping(uint256 => uint256))) nftItemBalances;

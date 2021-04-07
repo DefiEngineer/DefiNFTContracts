@@ -4,7 +4,7 @@ pragma solidity 0.8.3;
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {
     LibAppStorage,
-    AavegotchiCollateralTypeInfo,
+    CardCollateralTypeInfo,
     AppStorage,
     Aavegotchi,
     ItemType,
@@ -20,7 +20,7 @@ import {LibItems, ItemTypeIO} from "../libraries/LibItems.sol";
 
 struct AavegotchiCollateralTypeIO {
     address collateralType;
-    AavegotchiCollateralTypeInfo collateralTypeInfo;
+    CardCollateralTypeInfo collateralTypeInfo;
 }
 
 struct AavegotchiInfo {
@@ -109,7 +109,7 @@ library LibBasketball {
         singlePortalAavegotchiTraits_.numericTraits = toNumericTraits(randomNumberN, s.collateralTypeInfo[collateralType].modifiers);
         singlePortalAavegotchiTraits_.collateralType = collateralType;
 
-        AavegotchiCollateralTypeInfo memory collateralInfo = s.collateralTypeInfo[collateralType];
+        CardCollateralTypeInfo memory collateralInfo = s.collateralTypeInfo[collateralType];
         uint256 conversionRate = collateralInfo.conversionRate;
 
         //Get rarity multiplier

@@ -5,7 +5,6 @@ import {
     LibBasketball,
     AavegotchiInfo,
     NUMERIC_TRAITS_NUM,
-    AavegotchiCollateralTypeInfo,
     PortalAavegotchiTraitsIO,
     InternalPortalAavegotchiTraitsIO,
     PORTAL_AAVEGOTCHIS_NUM
