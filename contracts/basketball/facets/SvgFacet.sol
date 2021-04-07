@@ -34,7 +34,7 @@ contract SvgFacet is Modifiers {
     }
 
     // Given an aavegotchi token id, return the combined SVG of its layers and its wearables
-    function getAavegotchiSvg(uint256 _tokenId) public view returns (string memory ag_) {
+    function getCardSvg(uint256 _tokenId) public view returns (string memory ag_) {
         require(s.aavegotchis[_tokenId].owner != address(0), "SvgFacet: _tokenId does not exist");
 
         bytes memory svg;
@@ -47,7 +47,7 @@ contract SvgFacet is Modifiers {
             svg = LibSvg.getSvg("aavegotchi", 1);
         } else if (status == LibBasketball.STATUS_AAVEGOTCHI) {
             address collateralType = s.aavegotchis[_tokenId].collateralType;
-            svg = getAavegotchiSvgLayers(collateralType, s.aavegotchis[_tokenId].numericTraits, _tokenId);
+            svg = getCardSvgLayers(collateralType, s.aavegotchis[_tokenId].numericTraits, _tokenId);
         }
         ag_ = string(abi.encodePacked('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">', svg, "</svg>"));
     }
@@ -66,7 +66,7 @@ contract SvgFacet is Modifiers {
         string[7] eyeColors;
     }
 
-    function getAavegotchiSvgLayers(
+    function getCardSvgLayers(
         address _collateralType,
         int16[NUMERIC_TRAITS_NUM] memory _numericTraits,
         uint256 _tokenId
@@ -263,7 +263,7 @@ contract SvgFacet is Modifiers {
         // 10. pet wearable
     }
 
-    function portalAavegotchisSvg(uint256 _tokenId) external view returns (string[PORTAL_AAVEGOTCHIS_NUM] memory svg_) {
+    function cardPacksSvg(uint256 _tokenId) external view returns (string[PORTAL_AAVEGOTCHIS_NUM] memory svg_) {
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "SvgFacet: Portal not open");
         CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory l_portalAavegotchiTraits = LibBasketball.portalAavegotchiTraits(_tokenId);
         for (uint256 i; i < svg_.length; i++) {
@@ -271,7 +271,7 @@ contract SvgFacet is Modifiers {
             svg_[i] = string(
                 abi.encodePacked(
                     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">',
-                    getAavegotchiSvgLayers(collateralType, l_portalAavegotchiTraits[i].numericTraits, type(uint256).max),
+                    getCardSvgLayers(collateralType, l_portalAavegotchiTraits[i].numericTraits, type(uint256).max),
                     // get hands
                     LibSvg.getSvg("aavegotchi", 3),
                     "</svg>"
