@@ -23,7 +23,7 @@ import {CollateralEscrow} from "../CollateralEscrow.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC721Marketplace} from "../libraries/LibERC721Marketplace.sol";
 
-contract AavegotchiGameFacet is Modifiers {
+contract BasketballGameFacet is Modifiers {
     /// @dev This emits when the approved address for an NFT is changed or
     ///  reaffirmed. The zero address indicates there is no approved address.
     ///  When a Transfer event emits, this also indicates that the approved
@@ -82,7 +82,7 @@ contract AavegotchiGameFacet is Modifiers {
         uint256 level = LibAavegotchi.aavegotchiLevel(s.aavegotchis[_tokenId].experience);
         uint256 skillPoints = (level / 3);
         uint256 usedSkillPoints = s.aavegotchis[_tokenId].usedSkillPoints;
-        require(skillPoints >= usedSkillPoints, "AavegotchiGameFacet: Used skill points is greater than skill points");
+        require(skillPoints >= usedSkillPoints, "BasketballGameFacet: Used skill points is greater than skill points");
         return skillPoints - usedSkillPoints;
     }
 
@@ -122,8 +122,8 @@ contract AavegotchiGameFacet is Modifiers {
         uint256 _stakeAmount
     ) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
         Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
-        require(aavegotchi.status == LibAavegotchi.STATUS_OPEN_PORTAL, "AavegotchiGameFacet: Portal not open");
-        require(_option < PORTAL_AAVEGOTCHIS_NUM, "AavegotchiGameFacet: Only 10 aavegotchi options available");
+        require(aavegotchi.status == LibAavegotchi.STATUS_OPEN_PORTAL, "BasketballGameFacet: Portal not open");
+        require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
         InternalPortalAavegotchiTraitsIO memory option = LibAavegotchi.singlePortalAavegotchiTraits(randomNumber, _option);
@@ -135,7 +135,7 @@ contract AavegotchiGameFacet is Modifiers {
         aavegotchi.interactionCount = 50;
         aavegotchi.claimTime = uint40(block.timestamp);
 
-        require(_stakeAmount >= option.minimumStake, "AavegotchiGameFacet: _stakeAmount less than minimum stake");
+        require(_stakeAmount >= option.minimumStake, "BasketballGameFacet: _stakeAmount less than minimum stake");
 
         aavegotchi.status = LibAavegotchi.STATUS_AAVEGOTCHI;
         emit ClaimAavegotchi(_tokenId);
@@ -148,13 +148,13 @@ contract AavegotchiGameFacet is Modifiers {
     }
 
     function setAavegotchiName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
-        require(s.aavegotchis[_tokenId].status == LibAavegotchi.STATUS_AAVEGOTCHI, "AavegotchiGameFacet: Must claim Aavegotchi before setting name");
+        require(s.aavegotchis[_tokenId].status == LibAavegotchi.STATUS_AAVEGOTCHI, "BasketballGameFacet: Must claim Aavegotchi before setting name");
         string memory lowerName = LibAavegotchi.validateAndLowerName(_name);
         string memory existingName = s.aavegotchis[_tokenId].name;
         if (bytes(existingName).length > 0) {
             delete s.aavegotchiNamesUsed[LibAavegotchi.validateAndLowerName(existingName)];
         }
-        require(!s.aavegotchiNamesUsed[lowerName], "AavegotchiGameFacet: Aavegotchi name used already");
+        require(!s.aavegotchiNamesUsed[lowerName], "BasketballGameFacet: Aavegotchi name used already");
         s.aavegotchiNamesUsed[lowerName] = true;
         s.aavegotchis[_tokenId].name = _name;
         emit SetAavegotchiName(_tokenId, existingName, _name);
@@ -167,7 +167,7 @@ contract AavegotchiGameFacet is Modifiers {
             address owner = s.aavegotchis[tokenId].owner;
             require(
                 sender == owner || s.operators[owner][sender] || s.approved[tokenId] == sender,
-                "AavegotchiGameFacet: Not owner of token or approved"
+                "BasketballGameFacet: Not owner of token or approved"
             );
             LibAavegotchi.interact(tokenId);
         }
@@ -182,7 +182,7 @@ contract AavegotchiGameFacet is Modifiers {
             s.aavegotchis[_tokenId].numericTraits[index] += _values[index];
         }
         // handles underflow
-        require(availableSkillPoints(_tokenId) >= totalUsed, "AavegotchiGameFacet: Not enough skill points");
+        require(availableSkillPoints(_tokenId) >= totalUsed, "BasketballGameFacet: Not enough skill points");
         //Increment used skill points
         s.aavegotchis[_tokenId].usedSkillPoints += totalUsed;
         emit SpendSkillpoints(_tokenId, _values);
