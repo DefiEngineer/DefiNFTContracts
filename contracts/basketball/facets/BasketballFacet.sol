@@ -28,7 +28,7 @@ contract BasketballFacet {
         balance_ = s.ownerTokenIds[_owner].length;
     }
 
-    function getAavegotchi(uint256 _tokenId) external view returns (CardInfo memory aavegotchiInfo_) {
+    function getCard(uint256 _tokenId) external view returns (CardInfo memory aavegotchiInfo_) {
         aavegotchiInfo_ = LibBasketball.getAavegotchi(_tokenId);
     }
 
@@ -58,7 +58,7 @@ contract BasketballFacet {
         tokenIds_ = s.ownerTokenIds[_owner];
     }
 
-    function allAavegotchisOfOwner(address _owner) external view returns (CardInfo[] memory aavegotchiInfos_) {
+    function allCardsOfOwner(address _owner) external view returns (CardInfo[] memory aavegotchiInfos_) {
         uint256 length = s.ownerTokenIds[_owner].length;
         aavegotchiInfos_ = new CardInfo[](length);
         for (uint256 i; i < length; i++) {
