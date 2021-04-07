@@ -10,7 +10,6 @@ import {
     WearableSet,
     NUMERIC_TRAITS_NUM,
     EQUIPPED_WEARABLE_SLOTS,
-    PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibBasketball} from "../libraries/LibBasketball.sol";

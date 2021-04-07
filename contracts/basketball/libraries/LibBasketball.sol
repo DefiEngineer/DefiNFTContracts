@@ -10,7 +10,7 @@ import {
     ItemType,
     NUMERIC_TRAITS_NUM,
     EQUIPPED_WEARABLE_SLOTS,
-    PORTAL_AAVEGOTCHIS_NUM
+    PACK_CARDS_NUM
 } from "./LibAppStorage.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
@@ -42,7 +42,7 @@ struct CardInfo {
     uint256 toNextLevel;
     uint256 usedSkillPoints; //number of skill points used
     uint256 level; //the current aavegotchi level
-    uint256 hauntId;
+    uint256 releaseId;
     uint256 baseRarityScore;
     uint256 modifiedRarityScore;
     bool locked;
@@ -125,7 +125,7 @@ library LibBasketball {
     function cardPackTraits(uint256 _tokenId)
         internal
         view
-        returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
+        returns (CardPackTraitsIO[PACK_CARDS_NUM] memory portalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "LibBasketball: Pack not open");
@@ -147,7 +147,7 @@ library LibBasketball {
         aavegotchiInfo_.owner = s.aavegotchis[_tokenId].owner;
         aavegotchiInfo_.randomNumber = s.aavegotchis[_tokenId].randomNumber;
         aavegotchiInfo_.status = s.aavegotchis[_tokenId].status;
-        aavegotchiInfo_.hauntId = s.aavegotchis[_tokenId].hauntId;
+        aavegotchiInfo_.releaseId = s.aavegotchis[_tokenId].releaseId;
         if (aavegotchiInfo_.status == STATUS_AAVEGOTCHI) {
             aavegotchiInfo_.name = s.aavegotchis[_tokenId].name;
             aavegotchiInfo_.equippedWearables = s.aavegotchis[_tokenId].equippedWearables;

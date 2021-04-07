@@ -15,7 +15,7 @@ contract DAOFacet is Modifiers {
     event UpdateCollateralModifiers(int16[NUMERIC_TRAITS_NUM] _oldModifiers, int16[NUMERIC_TRAITS_NUM] _newModifiers);
     event AddCollateralType(CardCollateralTypeIO _collateralType);
     event AddItemType(ItemType _itemType);
-    event CreateRelease(uint256 indexed _hauntId, uint256 _hauntMaxSize, uint256 _portalPrice, bytes32 _bodyColor, string _image);
+    event CreateRelease(uint256 indexed _releaseId, uint256 _releaseMaxSize, uint256 _portalPrice, bytes32 _bodyColor, string _image);
     event GrantExperience(uint256[] _tokenIds, uint256[] _xpValues);
     event AddWearableSet(WearableSet _wearableSet);
     event GameManagerTransferred(address indexed previousGameManager, address indexed newGameManager);
@@ -63,22 +63,22 @@ contract DAOFacet is Modifiers {
     }
 
     function createRelease(
-        uint24 _hauntMaxSize,
+        uint24 _releaseMaxSize,
         uint96 _portalPrice,
         bytes3 _bodyColor,
         string memory _image
-    ) external onlyDaoOrOwner returns (uint256 hauntId_) {
-        uint256 currentHauntId = s.currentHauntId;
+    ) external onlyDaoOrOwner returns (uint256 releaseId_) {
+        uint256 currentReleaseId = s.currentReleaseId;
         require(
-            s.haunts[currentHauntId].totalCount == s.haunts[currentHauntId].hauntMaxSize,
+            s.releases[currentReleaseId].totalCount == s.releases[currentReleaseId].releaseMaxSize,
             "DAOFacet: Release must be full before creating new"
         );
-        hauntId_ = currentHauntId + 1;
-        s.currentHauntId = uint16(hauntId_);
-        s.haunts[hauntId_].hauntMaxSize = _hauntMaxSize;
-        s.haunts[hauntId_].portalPrice = _portalPrice;
-        s.haunts[hauntId_].bodyColor = _bodyColor;
-        emit CreateRelease(hauntId_, _hauntMaxSize, _portalPrice, _bodyColor, _image);
+        releaseId_ = currentReleaseId + 1;
+        s.currentReleaseId = uint16(releaseId_);
+        s.releases[releaseId_].releaseMaxSize = _releaseMaxSize;
+        s.releases[releaseId_].portalPrice = _portalPrice;
+        s.releases[releaseId_].bodyColor = _bodyColor;
+        emit CreateRelease(releaseId_, _releaseMaxSize, _portalPrice, _bodyColor, _image);
     }
 
     function mintItems(

@@ -6,7 +6,7 @@ import {
     LibBasketball,
     CardPackTraitsIO,
     EQUIPPED_WEARABLE_SLOTS,
-    PORTAL_AAVEGOTCHIS_NUM,
+    PACK_CARDS_NUM,
     NUMERIC_TRAITS_NUM
 } from "../libraries/LibBasketball.sol";
 import {LibItems} from "../libraries/LibItems.sol";
@@ -263,9 +263,9 @@ contract SvgFacet is Modifiers {
         // 10. pet wearable
     }
 
-    function cardPacksSvg(uint256 _tokenId) external view returns (string[PORTAL_AAVEGOTCHIS_NUM] memory svg_) {
+    function cardPacksSvg(uint256 _tokenId) external view returns (string[PACK_CARDS_NUM] memory svg_) {
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "SvgFacet: Portal not open");
-        CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory l_portalAavegotchiTraits = LibBasketball.cardPackTraits(_tokenId);
+        CardPackTraitsIO[PACK_CARDS_NUM] memory l_portalAavegotchiTraits = LibBasketball.cardPackTraits(_tokenId);
         for (uint256 i; i < svg_.length; i++) {
             address collateralType = l_portalAavegotchiTraits[i].collateralType;
             svg_[i] = string(

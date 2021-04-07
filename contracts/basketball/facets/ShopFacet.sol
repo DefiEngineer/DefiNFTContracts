@@ -27,9 +27,9 @@ contract ShopFacet {
     event PurchaseItemsWithVouchers(address indexed _buyer, address indexed _to, uint256[] _itemIds, uint256[] _quantities);
 
     function buyPacks(address _to, uint256 _ghst) external {
-        uint256 currentHauntId = s.currentHauntId;
-        Release storage haunt = s.haunts[currentHauntId];
-        uint256 price = haunt.portalPrice;
+        uint256 currentReleaseId = s.currentReleaseId;
+        Release storage release = s.releases[currentReleaseId];
+        uint256 price = release.portalPrice;
         require(_ghst >= price, "Not enough GHST to buy portals");
         uint256[3] memory tiers;
         tiers[0] = price * 5;
@@ -53,14 +53,14 @@ contract ShopFacet {
                 numToPurchase += 15;
             }
         }
-        uint256 hauntCount = haunt.totalCount + numToPurchase;
-        require(hauntCount <= haunt.hauntMaxSize, "ShopFacet: Exceeded max number of aavegotchis for this haunt");
-        s.haunts[currentHauntId].totalCount = uint24(hauntCount);
+        uint256 releaseCount = release.totalCount + numToPurchase;
+        require(releaseCount <= release.releaseMaxSize, "ShopFacet: Exceeded max number of cards for this release");
+        s.releases[currentReleaseId].totalCount = uint24(releaseCount);
         uint32 tokenId = s.tokenIdCounter;
         emit BuyPacks(sender, _to, tokenId, numToPurchase, totalPrice);
         for (uint256 i; i < numToPurchase; i++) {
             s.aavegotchis[tokenId].owner = _to;
-            s.aavegotchis[tokenId].hauntId = uint16(currentHauntId);
+            s.aavegotchis[tokenId].releaseId = uint16(currentReleaseId);
             s.tokenIdIndexes[tokenId] = s.tokenIds.length;
             s.tokenIds.push(tokenId);
             s.ownerTokenIdIndexes[_to][tokenId] = s.ownerTokenIds[_to].length;

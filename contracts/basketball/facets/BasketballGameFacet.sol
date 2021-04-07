@@ -6,7 +6,7 @@ import {
     NUMERIC_TRAITS_NUM,
     CardPackTraitsIO,
     InternalCardPackTraitsIO,
-    PORTAL_AAVEGOTCHIS_NUM
+    PACK_CARDS_NUM
 } from "../libraries/LibBasketball.sol";
 
 import {LibAppStorage} from "../libraries/LibAppStorage.sol";
@@ -46,9 +46,9 @@ contract BasketballGameFacet is Modifiers {
         available_ = s.aavegotchiNamesUsed[LibBasketball.validateAndLowerName(_name)];
     }
 
-    function currentRelease() external view returns (uint256 hauntId_, Release memory haunt_) {
-        hauntId_ = s.currentHauntId;
-        haunt_ = s.haunts[hauntId_];
+    function currentRelease() external view returns (uint256 releaseId_, Release memory release_) {
+        releaseId_ = s.currentReleaseId;
+        release_ = s.releases[releaseId_];
     }
 
     struct RevenueSharesIO {
@@ -64,7 +64,7 @@ contract BasketballGameFacet is Modifiers {
     function cardPackTraits(uint256 _tokenId)
         external
         view
-        returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
+        returns (CardPackTraitsIO[PACK_CARDS_NUM] memory portalAavegotchiTraits_)
     {
         portalAavegotchiTraits_ = LibBasketball.cardPackTraits(_tokenId);
     }
@@ -121,8 +121,8 @@ contract BasketballGameFacet is Modifiers {
         uint256 _stakeAmount
     ) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         Card storage aavegotchi = s.aavegotchis[_tokenId];
-        require(aavegotchi.status == LibBasketball.STATUS_OPEN_PORTAL, "BasketballGameFacet: Portal not open");
-        require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
+        require(aavegotchi.status == LibBasketball.STATUS_OPEN_PORTAL, "BasketballGameFacet: Pack not open");
+        require(_option < PACK_CARDS_NUM, "BasketballGameFacet: Only 5 card options available");
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
         InternalCardPackTraitsIO memory option = LibBasketball.singleCardPackTraits(randomNumber, _option);

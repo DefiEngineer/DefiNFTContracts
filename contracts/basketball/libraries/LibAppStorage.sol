@@ -9,7 +9,7 @@ import {ILink} from "../interfaces/ILink.sol";
 uint256 constant EQUIPPED_WEARABLE_SLOTS = 16;
 uint256 constant NUMERIC_TRAITS_NUM = 6;
 uint256 constant TRAIT_BONUSES_NUM = 5;
-uint256 constant PORTAL_AAVEGOTCHIS_NUM = 10;
+uint256 constant PACK_CARDS_NUM = 5;
 
 //  switch (traitType) {
 //         case 0:
@@ -39,7 +39,7 @@ struct Card {
     address collateralType;
     uint40 claimTime; //The block timestamp when this Card was claimed
     uint40 lastTemporaryBoost;
-    uint16 hauntId;
+    uint16 releaseId;
     address owner;
     uint8 status; // 0 == portal, 1 == VRF_PENDING, 2 == open portal, 3 == Card
     uint40 lastInteracted; //The last time this Card was interacted with
@@ -90,7 +90,7 @@ struct WearableSet {
 }
 
 struct Release {
-    uint256 hauntMaxSize; //The max size of the Release
+    uint256 releaseMaxSize; //The max size of the Release
     uint256 portalPrice;
     bytes3 bodyColor;
     uint24 totalCount;
@@ -157,7 +157,7 @@ struct AppStorage {
     mapping(address => mapping(uint256 => mapping(uint256 => uint256))) nftItemIndexes;
     ItemType[] itemTypes;
     WearableSet[] wearableSets;
-    mapping(uint256 => Release) haunts;
+    mapping(uint256 => Release) releases;
     mapping(address => mapping(uint256 => uint256)) ownerItemBalances;
     mapping(address => uint256[]) ownerItems;
     // indexes are stored 1 higher so that 0 means no items in items array
@@ -173,7 +173,7 @@ struct AppStorage {
     mapping(string => bool) aavegotchiNamesUsed;
     mapping(address => uint256) metaNonces;
     uint32 tokenIdCounter;
-    uint16 currentHauntId;
+    uint16 currentReleaseId;
     string name;
     string symbol;
     //Addresses
