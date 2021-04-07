@@ -12,10 +12,10 @@ contract CollateralEscrow {
 
     constructor(address _aTokenContract) {
         s.owner = LibMeta.msgSender();
-        approveAavegotchiDiamond(_aTokenContract);
+        approveBasketballDiamond(_aTokenContract);
     }
 
-    function approveAavegotchiDiamond(address _aTokenContract) public {
+    function approveBasketballDiamond(address _aTokenContract) public {
         require(LibMeta.msgSender() == s.owner, "CollateralEscrow: Not owner of contract");
         require(IERC20(_aTokenContract).approve(s.owner, type(uint256).max), "CollateralEscrow: token not approved for transfer");
     }
