@@ -5,7 +5,7 @@ import {
     LibBasketball,
     NUMERIC_TRAITS_NUM,
     CardPackTraitsIO,
-    InternalPortalAavegotchiTraitsIO,
+    InternalCardPackTraitsIO,
     PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibBasketball.sol";
 
@@ -124,7 +124,7 @@ contract BasketballGameFacet is Modifiers {
         require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
-        InternalPortalAavegotchiTraitsIO memory option = LibBasketball.singlePortalAavegotchiTraits(randomNumber, _option);
+        InternalCardPackTraitsIO memory option = LibBasketball.singlePortalAavegotchiTraits(randomNumber, _option);
         aavegotchi.randomNumber = option.randomNumber;
         aavegotchi.numericTraits = option.numericTraits;
         aavegotchi.collateralType = option.collateralType;

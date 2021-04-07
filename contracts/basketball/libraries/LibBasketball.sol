@@ -56,7 +56,7 @@ struct CardPackTraitsIO {
     uint256 minimumStake;
 }
 
-struct InternalPortalAavegotchiTraitsIO {
+struct InternalCardPackTraitsIO {
     uint256 randomNumber;
     int16[NUMERIC_TRAITS_NUM] numericTraits;
     address collateralType;
@@ -100,7 +100,7 @@ library LibBasketball {
     function singlePortalAavegotchiTraits(uint256 _randomNumber, uint256 _option)
         internal
         view
-        returns (InternalPortalAavegotchiTraitsIO memory singlePortalAavegotchiTraits_)
+        returns (InternalCardPackTraitsIO memory singlePortalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
         uint256 randomNumberN = uint256(keccak256(abi.encodePacked(_randomNumber, _option)));
@@ -133,7 +133,7 @@ library LibBasketball {
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
         for (uint256 i; i < portalAavegotchiTraits_.length; i++) {
-            InternalPortalAavegotchiTraitsIO memory single = singlePortalAavegotchiTraits(randomNumber, i);
+            InternalCardPackTraitsIO memory single = singlePortalAavegotchiTraits(randomNumber, i);
             portalAavegotchiTraits_[i].randomNumber = single.randomNumber;
             portalAavegotchiTraits_[i].collateralType = single.collateralType;
             portalAavegotchiTraits_[i].minimumStake = single.minimumStake;
