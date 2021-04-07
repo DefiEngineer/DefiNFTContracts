@@ -49,7 +49,7 @@ struct CardInfo {
     ItemTypeIO[] items;
 }
 
-struct PortalAavegotchiTraitsIO {
+struct CardPackTraitsIO {
     uint256 randomNumber;
     int16[NUMERIC_TRAITS_NUM] numericTraits;
     address collateralType;
@@ -125,7 +125,7 @@ library LibBasketball {
     function portalAavegotchiTraits(uint256 _tokenId)
         internal
         view
-        returns (PortalAavegotchiTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
+        returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "LibBasketball: Portal not open");

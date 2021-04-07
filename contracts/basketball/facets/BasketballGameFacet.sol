@@ -4,7 +4,7 @@ pragma solidity 0.8.3;
 import {
     LibBasketball,
     NUMERIC_TRAITS_NUM,
-    PortalAavegotchiTraitsIO,
+    CardPackTraitsIO,
     InternalPortalAavegotchiTraitsIO,
     PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibBasketball.sol";
@@ -63,7 +63,7 @@ contract BasketballGameFacet is Modifiers {
     function portalAavegotchiTraits(uint256 _tokenId)
         external
         view
-        returns (PortalAavegotchiTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
+        returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
         portalAavegotchiTraits_ = LibBasketball.portalAavegotchiTraits(_tokenId);
     }
