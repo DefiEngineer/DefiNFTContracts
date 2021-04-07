@@ -13,7 +13,7 @@ import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 contract ShopFacet {
     AppStorage internal s;
 
-    event BuyPortals(
+    event BuyPacks(
         address indexed _from,
         address indexed _to,
         // uint256 indexed _batchId,
@@ -22,11 +22,11 @@ contract ShopFacet {
         uint256 _totalPrice
     );
 
-    event PurchaseItemsWithGhst(address indexed _buyer, address indexed _to, uint256[] _itemIds, uint256[] _quantities, uint256 _totalPrice);
+    event PurchaseItemsWithDai(address indexed _buyer, address indexed _to, uint256[] _itemIds, uint256[] _quantities, uint256 _totalPrice);
 
     event PurchaseItemsWithVouchers(address indexed _buyer, address indexed _to, uint256[] _itemIds, uint256[] _quantities);
 
-    function buyPortals(address _to, uint256 _ghst) external {
+    function buyPacks(address _to, uint256 _ghst) external {
         uint256 currentHauntId = s.currentHauntId;
         Release storage haunt = s.haunts[currentHauntId];
         uint256 price = haunt.portalPrice;
@@ -57,7 +57,7 @@ contract ShopFacet {
         require(hauntCount <= haunt.hauntMaxSize, "ShopFacet: Exceeded max number of aavegotchis for this haunt");
         s.haunts[currentHauntId].totalCount = uint24(hauntCount);
         uint32 tokenId = s.tokenIdCounter;
-        emit BuyPortals(sender, _to, tokenId, numToPurchase, totalPrice);
+        emit BuyPacks(sender, _to, tokenId, numToPurchase, totalPrice);
         for (uint256 i; i < numToPurchase; i++) {
             s.aavegotchis[tokenId].owner = _to;
             s.aavegotchis[tokenId].hauntId = uint16(currentHauntId);
@@ -73,7 +73,7 @@ contract ShopFacet {
         LibBasketball.purchase(sender, totalPrice);
     }
 
-    function purchaseItemsWithGhst(
+    function purchaseItemsWithDai(
         address _to,
         uint256[] calldata _itemIds,
         uint256[] calldata _quantities
@@ -94,7 +94,7 @@ contract ShopFacet {
         }
         uint256 ghstBalance = IERC20(s.daiContract).balanceOf(sender);
         require(ghstBalance >= totalPrice, "ShopFacet: Not enough GHST!");
-        emit PurchaseItemsWithGhst(sender, _to, _itemIds, _quantities, totalPrice);
+        emit PurchaseItemsWithDai(sender, _to, _itemIds, _quantities, totalPrice);
         emit LibERC1155.TransferBatch(sender, address(0), _to, _itemIds, _quantities);
         LibBasketball.purchase(sender, totalPrice);
         LibERC1155.onERC1155BatchReceived(sender, address(0), _to, _itemIds, _quantities, "");
