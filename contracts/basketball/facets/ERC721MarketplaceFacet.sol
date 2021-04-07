@@ -72,7 +72,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         }
     }
 
-    struct AavegotchiListing {
+    struct CardListing {
         ERC721Listing listing_;
         CardInfo aavegotchiInfo_;
     }
@@ -82,9 +82,9 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 _category,
         string memory _sort,
         uint256 _length // how many items to get back or the rest available
-    ) external view returns (AavegotchiListing[] memory listings_) {
+    ) external view returns (CardListing[] memory listings_) {
         uint256 listingId = s.erc721OwnerListingHead[_owner][_category][_sort];
-        listings_ = new AavegotchiListing[](_length);
+        listings_ = new CardListing[](_length);
         uint256 listIndex;
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
@@ -118,9 +118,9 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 _category, // 0 == portal, 1 == vrf pending, 1 == open portal, 2 == Card
         string memory _sort, // "listed" or "purchased"
         uint256 _length // how many items to get back or the rest available
-    ) external view returns (AavegotchiListing[] memory listings_) {
+    ) external view returns (CardListing[] memory listings_) {
         uint256 listingId = s.erc721ListingHead[_category][_sort];
-        listings_ = new AavegotchiListing[](_length);
+        listings_ = new CardListing[](_length);
         uint256 listIndex;
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
