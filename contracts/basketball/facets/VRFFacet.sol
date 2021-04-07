@@ -85,8 +85,8 @@ import {ILink} from "../interfaces/ILink.sol";
 
 contract VrfFacet is Modifiers {
     event VrfRandomNumber(uint256 indexed tokenId, uint256 randomNumber, uint256 _vrfTimeSet);
-    event OpenPortals(uint256[] _tokenIds);
-    event PortalOpened(uint256 indexed tokenId);
+    event OpenPacks(uint256[] _tokenIds);
+    event PackOpened(uint256 indexed tokenId);
 
     /***********************************|
    |            Read Functions          |
@@ -118,7 +118,7 @@ contract VrfFacet is Modifiers {
     //     }
     // }
 
-    function openPortals(uint256[] calldata _tokenIds) external {
+    function openPacks(uint256[] calldata _tokenIds) external {
         address owner = LibMeta.msgSender();
         for (uint256 i; i < _tokenIds.length; i++) {
             uint256 tokenId = _tokenIds[i];
@@ -128,7 +128,7 @@ contract VrfFacet is Modifiers {
             drawRandomNumber(tokenId);
             LibERC721Marketplace.cancelERC721Listing(address(this), tokenId, owner);
         }
-        emit OpenPortals(_tokenIds);
+        emit OpenPacks(_tokenIds);
     }
 
     function drawRandomNumber(uint256 _tokenId) internal {
@@ -160,7 +160,7 @@ contract VrfFacet is Modifiers {
         s.aavegotchis[tokenId].status = LibBasketball.STATUS_OPEN_PORTAL;
         s.tokenIdToRandomNumber[tokenId] = _randomNumber;
 
-        emit PortalOpened(tokenId);
+        emit PackOpened(tokenId);
         emit VrfRandomNumber(tokenId, _randomNumber, block.timestamp);
     }
 
@@ -185,7 +185,7 @@ contract VrfFacet is Modifiers {
         s.aavegotchis[tokenId].status = LibBasketball.STATUS_OPEN_PORTAL;
         s.tokenIdToRandomNumber[tokenId] = _randomNumber;
 
-        emit PortalOpened(tokenId);
+        emit PackOpened(tokenId);
         emit VrfRandomNumber(tokenId, _randomNumber, block.timestamp);
     }
 
