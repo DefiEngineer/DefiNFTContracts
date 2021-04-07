@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibBasketball.sol";
+import {LibBasketball, AavegotchiInfo} from "../libraries/LibBasketball.sol";
 import {IERC721} from "../../shared/interfaces/IERC721.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
@@ -36,7 +36,7 @@ contract ERC721MarketplaceFacet is Modifiers {
     function getAavegotchiListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, AavegotchiInfo memory aavegotchiInfo_) {
         listing_ = s.erc721Listings[_listingId];
         require(listing_.timeCreated != 0, "ERC721Marketplace: ERC721 listing does not exist");
-        aavegotchiInfo_ = LibAavegotchi.getAavegotchi(listing_.erc721TokenId);
+        aavegotchiInfo_ = LibBasketball.getAavegotchi(listing_.erc721TokenId);
     }
 
     function getERC721Listing(uint256 _listingId) external view returns (ERC721Listing memory listing_) {
@@ -89,7 +89,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
             listings_[listIndex].listing_ = listing;
-            listings_[listIndex].aavegotchiInfo_ = LibAavegotchi.getAavegotchi(listing.erc721TokenId);
+            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getAavegotchi(listing.erc721TokenId);
             listingId = s.erc721OwnerListingListItem[listingId].childListingId;
         }
         assembly {
@@ -125,7 +125,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         for (; listingId != 0 && listIndex < _length; listIndex++) {
             ERC721Listing memory listing = s.erc721Listings[listingId];
             listings_[listIndex].listing_ = listing;
-            listings_[listIndex].aavegotchiInfo_ = LibAavegotchi.getAavegotchi(listing.erc721TokenId);
+            listings_[listIndex].aavegotchiInfo_ = LibBasketball.getAavegotchi(listing.erc721TokenId);
             listingId = s.erc721ListingListItem[listingId].childListingId;
         }
         assembly {
@@ -158,7 +158,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 listingId = s.nextERC721ListingId;
 
         uint256 category = getERC721Category(_erc721TokenAddress, _erc721TokenId);
-        require(category != LibAavegotchi.STATUS_VRF_PENDING, "ERC721Marketplace: Cannot list a portal that is pending VRF");
+        require(category != LibBasketball.STATUS_VRF_PENDING, "ERC721Marketplace: Cannot list a portal that is pending VRF");
 
         uint256 oldListingId = s.erc721TokenToListingId[_erc721TokenAddress][_erc721TokenId][owner];
         if (oldListingId != 0) {
@@ -222,7 +222,7 @@ contract ERC721MarketplaceFacet is Modifiers {
 
         //To do (Nick) -- Explain why this is necessary
         if (listing.erc721TokenAddress == address(this)) {
-            LibAavegotchi.transfer(seller, buyer, listing.erc721TokenId);
+            LibBasketball.transfer(seller, buyer, listing.erc721TokenId);
         } else {
             // GHSTStakingDiamond
             IERC721(listing.erc721TokenAddress).safeTransferFrom(seller, buyer, listing.erc721TokenId);

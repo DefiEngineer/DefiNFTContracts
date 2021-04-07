@@ -2,7 +2,7 @@
 pragma solidity 0.8.3;
 
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {LibAavegotchi, AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
+import {LibBasketball, AavegotchiCollateralTypeIO} from "../libraries/LibBasketball.sol";
 import {LibItems} from "../libraries/LibItems.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
@@ -125,7 +125,7 @@ contract CollateralFacet is Modifiers {
         // delete aavegotchi info
         string memory name = s.aavegotchis[_tokenId].name;
         if (bytes(name).length > 0) {
-            delete s.aavegotchiNamesUsed[LibAavegotchi.validateAndLowerName(name)];
+            delete s.aavegotchiNamesUsed[LibBasketball.validateAndLowerName(name)];
         }
         delete s.aavegotchis[_tokenId];
     }

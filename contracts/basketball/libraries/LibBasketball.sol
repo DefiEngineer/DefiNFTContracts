@@ -63,7 +63,7 @@ struct InternalPortalAavegotchiTraitsIO {
     uint256 minimumStake;
 }
 
-library LibAavegotchi {
+library LibBasketball {
     uint8 constant STATUS_CLOSED_PORTAL = 0;
     uint8 constant STATUS_VRF_PENDING = 1;
     uint8 constant STATUS_OPEN_PORTAL = 2;
@@ -89,7 +89,7 @@ library LibAavegotchi {
     }
 
     function rarityMultiplier(int16[NUMERIC_TRAITS_NUM] memory _numericTraits) internal pure returns (uint256 multiplier) {
-        uint256 rarityScore = LibAavegotchi.baseRarityScore(_numericTraits);
+        uint256 rarityScore = LibBasketball.baseRarityScore(_numericTraits);
         if (rarityScore < 300) return 10;
         else if (rarityScore >= 300 && rarityScore < 450) return 10;
         else if (rarityScore >= 450 && rarityScore <= 525) return 25;
@@ -128,7 +128,7 @@ library LibAavegotchi {
         returns (PortalAavegotchiTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.aavegotchis[_tokenId].status == LibAavegotchi.STATUS_OPEN_PORTAL, "LibBasketball: Portal not open");
+        require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_OPEN_PORTAL, "LibBasketball: Portal not open");
 
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
@@ -313,15 +313,15 @@ library LibAavegotchi {
     function validateAndLowerName(string memory _name) internal pure returns (string memory) {
         bytes memory name = abi.encodePacked(_name);
         uint256 len = name.length;
-        require(len != 0, "LibAavegotchi: name can't be 0 chars");
-        require(len < 26, "LibAavegotchi: name can't be greater than 25 characters");
+        require(len != 0, "LibBasketball: name can't be 0 chars");
+        require(len < 26, "LibBasketball: name can't be greater than 25 characters");
         uint256 char = uint256(uint8(name[0]));
-        require(char != 32, "LibAavegotchi: first char of name can't be a space");
+        require(char != 32, "LibBasketball: first char of name can't be a space");
         char = uint256(uint8(name[len - 1]));
-        require(char != 32, "LibAavegotchi: last char of name can't be a space");
+        require(char != 32, "LibBasketball: last char of name can't be a space");
         for (uint256 i; i < len; i++) {
             char = uint256(uint8(name[i]));
-            require(char > 31 && char < 127, "LibAavegotchi: invalid character in Aavegotchi name.");
+            require(char > 31 && char < 127, "LibBasketball: invalid character in Aavegotchi name.");
             if (char < 91 && char > 64) {
                 name[i] = bytes1(uint8(char + 32));
             }

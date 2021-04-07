@@ -13,7 +13,7 @@ import {
     PORTAL_AAVEGOTCHIS_NUM
 } from "../libraries/LibAppStorage.sol";
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
-import {LibAavegotchi} from "../libraries/LibBasketball.sol";
+import {LibBasketball} from "../libraries/LibBasketball.sol";
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC1155Marketplace} from "../libraries/LibERC1155Marketplace.sol";
@@ -182,7 +182,7 @@ contract ItemsFacet is Modifiers {
         Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
         address sender = LibMeta.msgSender();
 
-        uint256 aavegotchiLevel = LibAavegotchi.aavegotchiLevel(aavegotchi.experience);
+        uint256 aavegotchiLevel = LibBasketball.aavegotchiLevel(aavegotchi.experience);
 
         for (uint256 slot; slot < EQUIPPED_WEARABLE_SLOTS; slot++) {
             uint256 wearableId = _equippedWearables[slot];
@@ -234,7 +234,7 @@ contract ItemsFacet is Modifiers {
         }
         emit EquipWearables(_tokenId, aavegotchi.equippedWearables, _equippedWearables);
         aavegotchi.equippedWearables = _equippedWearables;
-        LibAavegotchi.interact(_tokenId);
+        LibBasketball.interact(_tokenId);
     }
 
     function useConsumables(
@@ -288,7 +288,7 @@ contract ItemsFacet is Modifiers {
             }
 
             itemType.totalQuantity -= quantity;
-            LibAavegotchi.interact(_tokenId);
+            LibBasketball.interact(_tokenId);
             LibERC1155Marketplace.updateERC1155Listing(address(this), itemId, sender);
         }
         emit UseConsumables(_tokenId, _itemIds, _quantities);

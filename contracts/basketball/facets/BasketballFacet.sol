@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibAavegotchi, AavegotchiInfo} from "../libraries/LibBasketball.sol";
+import {LibBasketball, AavegotchiInfo} from "../libraries/LibBasketball.sol";
 
 import {LibStrings} from "../../shared/libraries/LibStrings.sol";
 import {AppStorage} from "../libraries/LibAppStorage.sol";
@@ -29,7 +29,7 @@ contract BasketballFacet {
     }
 
     function getAavegotchi(uint256 _tokenId) external view returns (AavegotchiInfo memory aavegotchiInfo_) {
-        aavegotchiInfo_ = LibAavegotchi.getAavegotchi(_tokenId);
+        aavegotchiInfo_ = LibBasketball.getAavegotchi(_tokenId);
     }
 
     // /// @notice Enumerate valid NFTs
@@ -62,7 +62,7 @@ contract BasketballFacet {
         uint256 length = s.ownerTokenIds[_owner].length;
         aavegotchiInfos_ = new AavegotchiInfo[](length);
         for (uint256 i; i < length; i++) {
-            aavegotchiInfos_[i] = LibAavegotchi.getAavegotchi(s.ownerTokenIds[_owner][i]);
+            aavegotchiInfos_[i] = LibBasketball.getAavegotchi(s.ownerTokenIds[_owner][i]);
         }
     }
 
@@ -164,7 +164,7 @@ contract BasketballFacet {
             _sender == _from || s.operators[_from][_sender] || _sender == s.approved[_tokenId],
             "BasketballFacet: Not owner or approved to transfer"
         );
-        LibAavegotchi.transfer(_from, _to, _tokenId);
+        LibBasketball.transfer(_from, _to, _tokenId);
         LibERC721Marketplace.updateERC721Listing(address(this), _tokenId, _from);
     }
 

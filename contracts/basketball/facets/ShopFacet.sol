@@ -2,7 +2,7 @@
 pragma solidity 0.8.3;
 
 import {AppStorage, ItemType, Haunt} from "../libraries/LibAppStorage.sol";
-import {LibAavegotchi} from "../libraries/LibBasketball.sol";
+import {LibBasketball} from "../libraries/LibBasketball.sol";
 // import "hardhat/console.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
 import {LibERC721} from "../../shared/libraries/LibERC721.sol";
@@ -69,8 +69,8 @@ contract ShopFacet {
             tokenId++;
         }
         s.tokenIdCounter = tokenId;
-        LibAavegotchi.verify(tokenId);
-        LibAavegotchi.purchase(sender, totalPrice);
+        LibBasketball.verify(tokenId);
+        LibBasketball.purchase(sender, totalPrice);
     }
 
     function purchaseItemsWithGhst(
@@ -96,7 +96,7 @@ contract ShopFacet {
         require(ghstBalance >= totalPrice, "ShopFacet: Not enough GHST!");
         emit PurchaseItemsWithGhst(sender, _to, _itemIds, _quantities, totalPrice);
         emit LibERC1155.TransferBatch(sender, address(0), _to, _itemIds, _quantities);
-        LibAavegotchi.purchase(sender, totalPrice);
+        LibBasketball.purchase(sender, totalPrice);
         LibERC1155.onERC1155BatchReceived(sender, address(0), _to, _itemIds, _quantities, "");
     }
 }

@@ -4,7 +4,7 @@ pragma solidity 0.8.3;
 import {Modifiers} from "../miscellaneous/Modifiers.sol";
 import {LibMeta} from "../../shared/libraries/LibMeta.sol";
 import {LibERC721Marketplace} from "../libraries/LibERC721Marketplace.sol";
-import {LibAavegotchi} from "../libraries/LibBasketball.sol";
+import {LibBasketball} from "../libraries/LibBasketball.sol";
 import {ILink} from "../interfaces/ILink.sol";
 
 //import "hardhat/console.sol";
@@ -122,7 +122,7 @@ contract VrfFacet is Modifiers {
         address owner = LibMeta.msgSender();
         for (uint256 i; i < _tokenIds.length; i++) {
             uint256 tokenId = _tokenIds[i];
-            require(s.aavegotchis[tokenId].status == LibAavegotchi.STATUS_CLOSED_PORTAL, "VRFFacet: Portal is not closed");
+            require(s.aavegotchis[tokenId].status == LibBasketball.STATUS_CLOSED_PORTAL, "VRFFacet: Portal is not closed");
             require(owner == s.aavegotchis[tokenId].owner, "VRFFacet: Only aavegotchi owner can open a portal");
             require(s.aavegotchis[tokenId].locked == false, "VRFFacet: Can't open portal when it is locked");
             drawRandomNumber(tokenId);
@@ -132,7 +132,7 @@ contract VrfFacet is Modifiers {
     }
 
     function drawRandomNumber(uint256 _tokenId) internal {
-        s.aavegotchis[_tokenId].status = LibAavegotchi.STATUS_VRF_PENDING;
+        s.aavegotchis[_tokenId].status = LibBasketball.STATUS_VRF_PENDING;
         uint256 vrfFee = s.vrfFee;
         require(s.link.balanceOf(address(this)) >= vrfFee, "VrfFacet: Not enough LINK");
         bytes32 l_keyHash = s.vrfKeyHash;
@@ -156,8 +156,8 @@ contract VrfFacet is Modifiers {
         // console.log("token id:", tokenId);
 
         // require(LibMeta.msgSender() == im_vrfCoordinator, "Only VRFCoordinator can fulfill");
-        require(s.aavegotchis[tokenId].status == LibAavegotchi.STATUS_VRF_PENDING, "VrfFacet: VRF is not pending");
-        s.aavegotchis[tokenId].status = LibAavegotchi.STATUS_OPEN_PORTAL;
+        require(s.aavegotchis[tokenId].status == LibBasketball.STATUS_VRF_PENDING, "VrfFacet: VRF is not pending");
+        s.aavegotchis[tokenId].status = LibBasketball.STATUS_OPEN_PORTAL;
         s.tokenIdToRandomNumber[tokenId] = _randomNumber;
 
         emit PortalOpened(tokenId);
@@ -181,8 +181,8 @@ contract VrfFacet is Modifiers {
 
         require(LibMeta.msgSender() == s.vrfCoordinator, "Only VRFCoordinator can fulfill");
 
-        require(s.aavegotchis[tokenId].status == LibAavegotchi.STATUS_VRF_PENDING, "VrfFacet: VRF is not pending");
-        s.aavegotchis[tokenId].status = LibAavegotchi.STATUS_OPEN_PORTAL;
+        require(s.aavegotchis[tokenId].status == LibBasketball.STATUS_VRF_PENDING, "VrfFacet: VRF is not pending");
+        s.aavegotchis[tokenId].status = LibBasketball.STATUS_OPEN_PORTAL;
         s.tokenIdToRandomNumber[tokenId] = _randomNumber;
 
         emit PortalOpened(tokenId);
