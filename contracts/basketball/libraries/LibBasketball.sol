@@ -128,7 +128,7 @@ library LibAavegotchi {
         returns (PortalAavegotchiTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.aavegotchis[_tokenId].status == LibAavegotchi.STATUS_OPEN_PORTAL, "AavegotchiFacet: Portal not open");
+        require(s.aavegotchis[_tokenId].status == LibAavegotchi.STATUS_OPEN_PORTAL, "LibBasketball: Portal not open");
 
         uint256 randomNumber = s.tokenIdToRandomNumber[_tokenId];
 
@@ -176,7 +176,7 @@ library LibAavegotchi {
         returns (int16[NUMERIC_TRAITS_NUM] memory numericTraits_, uint256 rarityScore_)
     {
         AppStorage storage s = LibAppStorage.diamondStorage();
-        require(s.aavegotchis[_tokenId].status == STATUS_AAVEGOTCHI, "AavegotchiFacet: Must be claimed");
+        require(s.aavegotchis[_tokenId].status == STATUS_AAVEGOTCHI, "LibBasketball: Must be claimed");
         Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
         numericTraits_ = getNumericTraits(_tokenId);
         uint256 wearableBonus;

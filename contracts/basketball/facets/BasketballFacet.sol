@@ -11,7 +11,7 @@ import {LibERC721Marketplace} from "../libraries/LibERC721Marketplace.sol";
 import {LibERC721} from "../../shared/libraries/LibERC721.sol";
 import {IERC721TokenReceiver} from "../../shared/interfaces/IERC721TokenReceiver.sol";
 
-contract AavegotchiFacet {
+contract BasketballFacet {
     AppStorage internal s;
 
     function totalSupply() external view returns (uint256 totalSupply_) {
@@ -24,7 +24,7 @@ contract AavegotchiFacet {
     /// @param _owner An address for whom to query the balance
     /// @return balance_ The number of NFTs owned by `_owner`, possibly zero
     function balanceOf(address _owner) external view returns (uint256 balance_) {
-        require(_owner != address(0), "AavegotchiFacet: _owner can't be address(0");
+        require(_owner != address(0), "BasketballFacet: _owner can't be address(0");
         balance_ = s.ownerTokenIds[_owner].length;
     }
 
@@ -38,7 +38,7 @@ contract AavegotchiFacet {
     // /// @return The token identifier for the `_index`th NFT,
     // ///  (sort order not specified)
     function tokenByIndex(uint256 _index) external view returns (uint256 tokenId_) {
-        require(_index < s.tokenIds.length, "AavegotchiFacet: index beyond supply");
+        require(_index < s.tokenIds.length, "BasketballFacet: index beyond supply");
         tokenId_ = s.tokenIds[_index];
     }
 
@@ -50,7 +50,7 @@ contract AavegotchiFacet {
     // /// @return The token identifier for the `_index`th NFT assigned to `_owner`,
     // ///   (sort order not specified)
     function tokenOfOwnerByIndex(address _owner, uint256 _index) external view returns (uint256 tokenId_) {
-        require(_index < s.ownerTokenIds[_owner].length, "AavegotchiFacet: index beyond owner balance");
+        require(_index < s.ownerTokenIds[_owner].length, "BasketballFacet: index beyond owner balance");
         tokenId_ = s.ownerTokenIds[_owner][_index];
     }
 
@@ -73,7 +73,7 @@ contract AavegotchiFacet {
     /// @return owner_ The address of the owner of the NFT
     function ownerOf(uint256 _tokenId) external view returns (address owner_) {
         owner_ = s.aavegotchis[_tokenId].owner;
-        require(owner_ != address(0), "AavegotchiFacet: invalid _tokenId");
+        require(owner_ != address(0), "BasketballFacet: invalid _tokenId");
     }
 
     /// @notice Get the approved address for a single NFT
@@ -157,12 +157,12 @@ contract AavegotchiFacet {
         address _to,
         uint256 _tokenId
     ) internal {
-        require(_to != address(0), "AavegotchiFacet: Can't transfer to 0 address");
-        require(_from != address(0), "AavegotchiFacet: _from can't be 0 address");
-        require(_from == s.aavegotchis[_tokenId].owner, "AavegotchiFacet: _from is not owner, transfer failed");
+        require(_to != address(0), "BasketballFacet: Can't transfer to 0 address");
+        require(_from != address(0), "BasketballFacet: _from can't be 0 address");
+        require(_from == s.aavegotchis[_tokenId].owner, "BasketballFacet: _from is not owner, transfer failed");
         require(
             _sender == _from || s.operators[_from][_sender] || _sender == s.approved[_tokenId],
-            "AavegotchiFacet: Not owner or approved to transfer"
+            "BasketballFacet: Not owner or approved to transfer"
         );
         LibAavegotchi.transfer(_from, _to, _tokenId);
         LibERC721Marketplace.updateERC721Listing(address(this), _tokenId, _from);

@@ -71,7 +71,7 @@ contract DAOFacet is Modifiers {
         uint256 currentHauntId = s.currentHauntId;
         require(
             s.haunts[currentHauntId].totalCount == s.haunts[currentHauntId].hauntMaxSize,
-            "AavegotchiFacet: Haunt must be full before creating new"
+            "DAOFacet: Haunt must be full before creating new"
         );
         hauntId_ = currentHauntId + 1;
         s.currentHauntId = uint16(hauntId_);
