@@ -3,7 +3,6 @@ pragma solidity 0.8.3;
 
 import {
     LibBasketball,
-    AavegotchiInfo,
     NUMERIC_TRAITS_NUM,
     PortalAavegotchiTraitsIO,
     InternalPortalAavegotchiTraitsIO,

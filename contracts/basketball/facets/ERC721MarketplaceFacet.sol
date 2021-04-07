@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.3;
 
-import {LibBasketball, AavegotchiInfo} from "../libraries/LibBasketball.sol";
+import {LibBasketball, CardInfo} from "../libraries/LibBasketball.sol";
 import {IERC721} from "../../shared/interfaces/IERC721.sol";
 import {LibERC20} from "../../shared/libraries/LibERC20.sol";
 import {IERC20} from "../../shared/interfaces/IERC20.sol";
@@ -33,7 +33,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 time
     );
 
-    function getAavegotchiListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, AavegotchiInfo memory aavegotchiInfo_) {
+    function getAavegotchiListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, CardInfo memory aavegotchiInfo_) {
         listing_ = s.erc721Listings[_listingId];
         require(listing_.timeCreated != 0, "ERC721Marketplace: ERC721 listing does not exist");
         aavegotchiInfo_ = LibBasketball.getAavegotchi(listing_.erc721TokenId);
@@ -74,7 +74,7 @@ contract ERC721MarketplaceFacet is Modifiers {
 
     struct AavegotchiListing {
         ERC721Listing listing_;
-        AavegotchiInfo aavegotchiInfo_;
+        CardInfo aavegotchiInfo_;
     }
 
     function getOwnerAavegotchiListings(

@@ -23,7 +23,7 @@ struct CardCollateralTypeIO {
     CardCollateralTypeInfo collateralTypeInfo;
 }
 
-struct AavegotchiInfo {
+struct CardInfo {
     uint256 tokenId;
     string name;
     address owner;
@@ -141,7 +141,7 @@ library LibBasketball {
         }
     }
 
-    function getAavegotchi(uint256 _tokenId) internal view returns (AavegotchiInfo memory aavegotchiInfo_) {
+    function getAavegotchi(uint256 _tokenId) internal view returns (CardInfo memory aavegotchiInfo_) {
         AppStorage storage s = LibAppStorage.diamondStorage();
         aavegotchiInfo_.tokenId = _tokenId;
         aavegotchiInfo_.owner = s.aavegotchis[_tokenId].owner;
