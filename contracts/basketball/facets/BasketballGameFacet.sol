@@ -120,7 +120,7 @@ contract BasketballGameFacet is Modifiers {
         uint256 _tokenId,
         uint256 _option,
         uint256 _stakeAmount
-    ) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
+    ) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
         require(aavegotchi.status == LibBasketball.STATUS_OPEN_PORTAL, "BasketballGameFacet: Portal not open");
         require(_option < PORTAL_AAVEGOTCHIS_NUM, "BasketballGameFacet: Only 10 aavegotchi options available");
@@ -147,7 +147,7 @@ contract BasketballGameFacet is Modifiers {
         LibERC721Marketplace.cancelERC721Listing(address(this), _tokenId, owner);
     }
 
-    function setAavegotchiName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
+    function setAavegotchiName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_AAVEGOTCHI, "BasketballGameFacet: Must claim Aavegotchi before setting name");
         string memory lowerName = LibBasketball.validateAndLowerName(_name);
         string memory existingName = s.aavegotchis[_tokenId].name;
@@ -173,7 +173,7 @@ contract BasketballGameFacet is Modifiers {
         }
     }
 
-    function spendSkillPoints(uint256 _tokenId, int16[4] calldata _values) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
+    function spendSkillPoints(uint256 _tokenId, int16[4] calldata _values) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         //To test (Dan): Prevent underflow (is this ok?), see require below
         uint256 totalUsed;
         for (uint256 index; index < _values.length; index++) {

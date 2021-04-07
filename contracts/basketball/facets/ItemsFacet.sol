@@ -178,7 +178,7 @@ contract ItemsFacet is Modifiers {
    |             Write Functions        |
    |__________________________________*/
 
-    function equipWearables(uint256 _tokenId, uint16[EQUIPPED_WEARABLE_SLOTS] calldata _equippedWearables) external onlyAavegotchiOwner(_tokenId) {
+    function equipWearables(uint256 _tokenId, uint16[EQUIPPED_WEARABLE_SLOTS] calldata _equippedWearables) external onlyCardOwner(_tokenId) {
         Aavegotchi storage aavegotchi = s.aavegotchis[_tokenId];
         address sender = LibMeta.msgSender();
 
@@ -241,7 +241,7 @@ contract ItemsFacet is Modifiers {
         uint256 _tokenId,
         uint256[] calldata _itemIds,
         uint256[] calldata _quantities
-    ) external onlyUnlocked(_tokenId) onlyAavegotchiOwner(_tokenId) {
+    ) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         require(_itemIds.length == _quantities.length, "ItemsFacet: _itemIds length does not match _quantities length");
         address sender = LibMeta.msgSender();
         for (uint256 i; i < _itemIds.length; i++) {
