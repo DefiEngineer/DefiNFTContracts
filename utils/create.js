@@ -118,7 +118,7 @@ async function createDiamond() {
   const { DAOFacet } = diamondFacets;
 
   // Add initial release
-  tx = await DAOFacet.createHaunt(
+  tx = await DAOFacet.createRelease(
     initialReleaseSize,
     packPrice,
     "0x000000",

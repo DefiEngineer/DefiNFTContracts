@@ -15,7 +15,7 @@ task("accounts", "Prints the list of accounts", async () => {
 //     "0x9A676e781A523b5d0C0e43731313A708CB607508"
 //   );
 //   const packPrice = ethers.utils.parseEther("100");
-//   const tx = await contract.createHaunt("10000", packPrice, "0x000000");
+//   const tx = await contract.createRelease("10000", packPrice, "0x000000");
 //   await tx.wait();
 // });
 

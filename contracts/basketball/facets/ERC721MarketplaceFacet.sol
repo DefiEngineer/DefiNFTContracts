@@ -33,7 +33,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         uint256 time
     );
 
-    function getAavegotchiListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, CardInfo memory aavegotchiInfo_) {
+    function getCardListing(uint256 _listingId) external view returns (ERC721Listing memory listing_, CardInfo memory aavegotchiInfo_) {
         listing_ = s.erc721Listings[_listingId];
         require(listing_.timeCreated != 0, "ERC721Marketplace: ERC721 listing does not exist");
         aavegotchiInfo_ = LibBasketball.getAavegotchi(listing_.erc721TokenId);
@@ -77,7 +77,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         CardInfo aavegotchiInfo_;
     }
 
-    function getOwnerAavegotchiListings(
+    function getOwnerCardListings(
         address _owner,
         uint256 _category,
         string memory _sort,
@@ -114,7 +114,7 @@ contract ERC721MarketplaceFacet is Modifiers {
         }
     }
 
-    function getAavegotchiListings(
+    function getCardListings(
         uint256 _category, // 0 == portal, 1 == vrf pending, 1 == open portal, 2 == Card
         string memory _sort, // "listed" or "purchased"
         uint256 _length // how many items to get back or the rest available
