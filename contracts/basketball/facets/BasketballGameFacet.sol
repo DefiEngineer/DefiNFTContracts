@@ -30,22 +30,23 @@ contract BasketballGameFacet is Modifiers {
     /// @dev This emits when an operator is enabled or disabled for an owner.
     ///  The operator can manage all NFTs of the owner.
 
-    event ClaimAavegotchi(uint256 indexed _tokenId);
+    event ClaimCard(uint256 indexed _tokenId);
 
-    event SetAavegotchiName(uint256 indexed _tokenId, string _oldName, string _newName);
+    event SetCardName(uint256 indexed _tokenId, string _oldName, string _newName);
 
     event SetBatchId(uint256 indexed _batchId, uint256[] tokenIds);
 
-    event SpendSkillpoints(uint256 indexed _tokenId, int16[4] _values);
+    event SpendSkillPoints(uint256 indexed _tokenId, int16[4] _values);
 
-    event LockAavegotchi(uint256 indexed _tokenId, uint256 _time);
-    event UnLockAavegotchi(uint256 indexed _tokenId, uint256 _time);
+    event LockCard(uint256 indexed _tokenId, uint256 _time);
+    
+    event UnlockCard(uint256 indexed _tokenId, uint256 _time);
 
-    function aavegotchiNameAvailable(string calldata _name) external view returns (bool available_) {
+    function cardNameAvailable(string calldata _name) external view returns (bool available_) {
         available_ = s.aavegotchiNamesUsed[LibBasketball.validateAndLowerName(_name)];
     }
 
-    function currentHaunt() external view returns (uint256 hauntId_, Release memory haunt_) {
+    function currentRelease() external view returns (uint256 hauntId_, Release memory haunt_) {
         hauntId_ = s.currentHauntId;
         haunt_ = s.haunts[hauntId_];
     }
@@ -60,7 +61,7 @@ contract BasketballGameFacet is Modifiers {
         return RevenueSharesIO(0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF, s.daoTreasury, s.dfsnft);
     }
 
-    function portalAavegotchiTraits(uint256 _tokenId)
+    function cardPackTraits(uint256 _tokenId)
         external
         view
         returns (CardPackTraitsIO[PORTAL_AAVEGOTCHIS_NUM] memory portalAavegotchiTraits_)
@@ -84,7 +85,7 @@ contract BasketballGameFacet is Modifiers {
         return skillPoints - usedSkillPoints;
     }
 
-    function aavegotchiLevel(uint256 _experience) external pure returns (uint256 level_) {
+    function cardLevel(uint256 _experience) external pure returns (uint256 level_) {
         level_ = LibBasketball.aavegotchiLevel(_experience);
     }
 
@@ -110,11 +111,11 @@ contract BasketballGameFacet is Modifiers {
         (numericTraits_, rarityScore_) = LibBasketball.modifiedTraitsAndRarityScore(_tokenId);
     }
 
-    function kinship(uint256 _tokenId) external view returns (uint256 score_) {
+    function morale(uint256 _tokenId) external view returns (uint256 score_) {
         score_ = LibBasketball.kinship(_tokenId);
     }
 
-    function claimAavegotchi(
+    function claimCard(
         uint256 _tokenId,
         uint256 _option,
         uint256 _stakeAmount
@@ -136,7 +137,7 @@ contract BasketballGameFacet is Modifiers {
         require(_stakeAmount >= option.minimumStake, "BasketballGameFacet: _stakeAmount less than minimum stake");
 
         aavegotchi.status = LibBasketball.STATUS_AAVEGOTCHI;
-        emit ClaimAavegotchi(_tokenId);
+        emit ClaimCard(_tokenId);
 
         address escrow = address(new CollateralEscrow(option.collateralType));
         aavegotchi.escrow = escrow;
@@ -145,7 +146,7 @@ contract BasketballGameFacet is Modifiers {
         LibERC721Marketplace.cancelERC721Listing(address(this), _tokenId, owner);
     }
 
-    function setAavegotchiName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
+    function setCardName(uint256 _tokenId, string calldata _name) external onlyUnlocked(_tokenId) onlyCardOwner(_tokenId) {
         require(s.aavegotchis[_tokenId].status == LibBasketball.STATUS_AAVEGOTCHI, "BasketballGameFacet: Must claim Card before setting name");
         string memory lowerName = LibBasketball.validateAndLowerName(_name);
         string memory existingName = s.aavegotchis[_tokenId].name;
@@ -155,10 +156,10 @@ contract BasketballGameFacet is Modifiers {
         require(!s.aavegotchiNamesUsed[lowerName], "BasketballGameFacet: Card name used already");
         s.aavegotchiNamesUsed[lowerName] = true;
         s.aavegotchis[_tokenId].name = _name;
-        emit SetAavegotchiName(_tokenId, existingName, _name);
+        emit SetCardName(_tokenId, existingName, _name);
     }
 
-    function interact(uint256[] calldata _tokenIds) external {
+    function train(uint256[] calldata _tokenIds) external {
         address sender = LibMeta.msgSender();
         for (uint256 i; i < _tokenIds.length; i++) {
             uint256 tokenId = _tokenIds[i];
@@ -183,6 +184,6 @@ contract BasketballGameFacet is Modifiers {
         require(availableSkillPoints(_tokenId) >= totalUsed, "BasketballGameFacet: Not enough skill points");
         //Increment used skill points
         s.aavegotchis[_tokenId].usedSkillPoints += totalUsed;
-        emit SpendSkillpoints(_tokenId, _values);
+        emit SpendSkillPoints(_tokenId, _values);
     }
 }
